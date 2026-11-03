@@ -113,6 +113,13 @@ namespace Hooks
 			return;
 		}
 
+		{
+			static std::atomic<int> logged{ 0 };
+			if (logged.fetch_add(1) < 5) {
+				logger::info("melee hit hook: {} hit {}, flags {:#x}", aggressor->GetName(), victim->GetName(), static_cast<std::uint32_t>(hitData.flags.underlying()));
+			}
+		}
+
 		if (settings::bPoise_PoiseToggle) {
 			hitData.stagger = 0.0f;
 		}
