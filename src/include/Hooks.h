@@ -106,6 +106,21 @@ namespace Hooks
 				for (const auto s : sites) {
 					logger::info("hook:OnMeleeHit processHit: call to id 38586 at +{:#x}", s - hook.address());
 				}
+				if (sites.empty()) {
+					// Another plugin (Precision, an impact framework ...) may already have rewritten this call, so no call to 38586 is left to find. On 1.7.104 the site is at the
+					// same offset as on 1.6 AE (+0x4A8); take it only if the code around it is exactly the game's (the 8 bytes before the call and the 23 after it) and hook it as a
+					// chain: write_call returns whatever the call went to, so the other plugin keeps working.
+					static constexpr std::uint8_t before[] = { 0x48, 0x8D, 0x54, 0x24, 0x50, 0x48, 0x8B, 0xCF };
+					static constexpr std::uint8_t after[] = { 0xF3, 0x0F, 0x10, 0x8C, 0x24, 0xCC, 0x00, 0x00, 0x00, 0x0F, 0x2F, 0xCE, 0x76, 0x0E, 0x45, 0x33, 0xC9, 0x4C, 0x8B, 0xC7, 0x48, 0x8B, 0xCB };
+					const auto                    fixed = hook.address() + 0x4A8;
+					if (*reinterpret_cast<const std::uint8_t*>(fixed) == 0xE8 && std::memcmp(reinterpret_cast<const void*>(fixed - sizeof(before)), before, sizeof(before)) == 0 &&
+						std::memcmp(reinterpret_cast<const void*>(fixed + 5), after, sizeof(after)) == 0) {
+						logger::info("hook:OnMeleeHit processHit: the call to id 38586 was already rewritten by another plugin; the code around +0x4A8 is the game's, hooking it as a chain");
+						_ProcessHit = trampoline.write_call<5>(fixed, processHit);
+						logger::info("hook:OnMeleeHit (chained)");
+						return;
+					}
+				}
 				if (sites.size() != 1) {
 					logger::error("hook:OnMeleeHit processHit SKIPPED: found {} calls to id 38586 in id 38627, expected exactly one", sites.size());
 					return;
