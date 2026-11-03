@@ -141,7 +141,7 @@ bool parryHandler::processMeleeParry(RE::Actor* a_aggressor, RE::Actor* a_victim
 
         if (settings::bEnableParryExp && a_victim->IsPlayerRef()) {
             if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-                pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fParryMeleeExp);
+                pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fParryMeleeExp, nullptr, 0);
             }
         }
         if (settings::bApplySpellOnSuccess) {
@@ -208,7 +208,7 @@ bool parryHandler::processProjectileParry(RE::Actor* a_parrier, RE::Projectile* 
 
         if (settings::bEnableParryExp && a_parrier->IsPlayerRef()) {
             if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-                pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fParryProjectileExp);
+                pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fParryProjectileExp, nullptr, 0);
             }
         }
         if (settings::bApplySpellOnSuccess) {

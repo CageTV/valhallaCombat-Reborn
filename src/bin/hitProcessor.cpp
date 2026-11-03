@@ -180,3 +180,41 @@ void hitProcessor::processHit(RE::Actor* a_aggressor, RE::Actor* a_victim, RE::H
 		AILearning::GetSingleton()->safeRecordImpact(a_aggressor, a_victim, isPower);
 	}
 }
+
+bool hitProcessor::claimHit(RE::Actor* a_aggressor, RE::Actor* a_victim)
+{
+	static std::mutex                            lock;
+	static std::uint64_t                         lastPair = 0;
+	static std::chrono::steady_clock::time_point lastTime{};
+	const std::uint64_t                          pair = (static_cast<std::uint64_t>(a_aggressor->GetFormID()) << 32) | a_victim->GetFormID();
+	const auto                                   now = std::chrono::steady_clock::now();
+	std::lock_guard<std::mutex>                  guard(lock);
+	if (pair == lastPair && now - lastTime < std::chrono::milliseconds(50)) {
+		return false;
+	}
+	lastPair = pair;
+	lastTime = now;
+	return true;
+}
+
+void hitProcessor::precisionPosthitCallbackFunc(const PRECISION_API::PrecisionHitData& a_precisionHitData, const RE::HitData& a_hitData)
+{
+	auto aggressor = a_precisionHitData.attacker;
+	auto target = a_precisionHitData.target;
+	if (!aggressor || !target || target->GetFormType() != RE::FormType::ActorCharacter) {
+		return;
+	}
+	auto victim = target->As<RE::Actor>();
+	if (!victim || victim->IsDead()) {
+		return;
+	}
+	static std::atomic<int> logged{ 0 };
+	if (logged.fetch_add(1) < 5) {
+		logger::info("Precision post-hit: {} hit {}, flags {:#x}, weapon {}", aggressor->GetName(), victim->GetName(), static_cast<std::uint32_t>(a_hitData.flags.underlying()),
+			a_hitData.weapon ? a_hitData.weapon->GetName() : "none");
+	}
+	if (!claimHit(aggressor, victim)) {
+		return;
+	}
+	hitProcessor::GetSingleton()->processHit(aggressor, victim, const_cast<RE::HitData&>(a_hitData));
+}

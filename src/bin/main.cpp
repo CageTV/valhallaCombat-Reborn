@@ -1,5 +1,6 @@
 #include "SimpleIni.h"
 #include "include/Hooks.h"
+#include "include/hitProcessor.h"
 #include "include/Papyrus.h"
 #include "include/data.h"
 #include "include/events.h"
@@ -48,6 +49,10 @@ void initPrecisionAPI() {
 		if (res == PRECISION_API::APIResult::OK ||
 			res == PRECISION_API::APIResult::AlreadyRegistered) {
 			logger::info("Collision prehit callback successfully registered.");
+		}
+		res = val->ersh_Precision->AddPostHitCallback(SKSE::GetPluginHandle(), hitProcessor::precisionPosthitCallbackFunc);
+		if (res == PRECISION_API::APIResult::OK || res == PRECISION_API::APIResult::AlreadyRegistered) {
+			logger::info("Collision posthit callback successfully registered.");
 		}
 	}
 	else {

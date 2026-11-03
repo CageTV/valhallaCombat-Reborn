@@ -4,6 +4,50 @@
 #include "include/Utils.h"
 namespace Hooks
 {
+	/* 1.7.x build: the call offsets below were measured on 1.6.x. A write_call over anything but a CALL (E8) would corrupt the code, so a hook is installed
+	only when the byte at the site really is a call into the code section; otherwise it is skipped and logged (this game version needs a new offset). */
+	/*True on Skyrim 1.7.99 and newer.*/
+	inline bool IsRuntime17()
+	{
+		return REL::Module::IsAtLeast(SKSE::RUNTIME_SSE_1_7_99);
+	}
+
+	inline bool CheckCallSite(std::uintptr_t a_site, std::string_view a_name)
+	{
+		const auto op = *reinterpret_cast<const std::uint8_t*>(a_site);
+		if (op != 0xE8) {
+			logger::error("hook:{} SKIPPED: the byte at the call site is {:#04x}, not a call (E8). This game version needs a new offset", a_name, op);
+			return false;
+		}
+		const auto rel = *reinterpret_cast<const std::int32_t*>(a_site + 1);
+		const auto target = a_site + 5 + rel;
+		const auto text = REL::Module::get().segment(REL::Segment::textx);
+		if (target < text.address() || target >= text.address() + text.size()) {
+			logger::error("hook:{} SKIPPED: the E8 at the call site points outside the code section (target RVA {:#x}), so it is the middle of another instruction. This game version needs a new offset",
+				a_name, static_cast<std::int64_t>(target - REL::Module::get().base()));
+			return false;
+		}
+		logger::info("hook:{} site ok, calls RVA {:#x}", a_name, target - REL::Module::get().base());
+		return true;
+	}
+
+	/*Every call inside [a_base, a_base + a_len) that goes to the function with the given Address Library id. The offset of a call site moves between game
+	versions, the function it calls does not, so the site is found by what it calls.*/
+	inline std::vector<std::uintptr_t> FindCallsTo(std::uintptr_t a_base, std::size_t a_len, std::uint64_t a_targetId)
+	{
+		std::vector<std::uintptr_t> sites;
+		const auto                  want = REL::ID(a_targetId).address();
+		for (std::size_t i = 0; i + 5 <= a_len; ++i) {
+			const auto p = a_base + i;
+			if (*reinterpret_cast<const std::uint8_t*>(p) != 0xE8) {
+				continue;
+			}
+			if (p + 5 + *reinterpret_cast<const std::int32_t*>(p + 1) == want) {
+				sites.push_back(p);
+			}
+		}
+		return sites;
+	}
 	class Hook_OnGetAttackStaminaCost  //Actor__sub_140627930+16E	call ActorValueOwner__sub_1403BEC90
 	{
 		/*to cancel out vanilla power attack stamina consumption.*/
@@ -14,7 +58,11 @@ namespace Hooks
 
 			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(37650, 38603) };  //SE:627930 + 16E => 3BEC90 AE:64D350 + 171 => 3D6720
 
-			_getAttackStaminaCost = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x16E, 0x171), getAttackStaminaCost);
+			const auto site = hook.address() + RELOCATION_OFFSET(0x16E, 0x171);
+			if (!CheckCallSite(site, "getAttackStaminaCost")) {
+				return;
+			}
+			_getAttackStaminaCost = trampoline.write_call<5>(site, getAttackStaminaCost);
 			
 			logger::info("hook:OnGetAttackStaminaCost");
 		}
@@ -31,7 +79,11 @@ namespace Hooks
 		{
 			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(37510, 38452) };// 140620690       140645AA0
 			auto& trampoline = SKSE::GetTrampoline();
-			_RestoreActorValue = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x176, 0xE1), RestoreActorValue);
+			const auto site = hook.address() + RELOCATION_OFFSET(0x176, 0xE1);
+			if (!CheckCallSite(site, "RestoreActorValue")) {
+				return;
+			}
+			_RestoreActorValue = trampoline.write_call<5>(site, RestoreActorValue);
 			logger::info("hook:OnRestoresActorValue");
 		}
 
@@ -47,7 +99,23 @@ namespace Hooks
 		{
 			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(37673, 38627) };  //140628C20       14064E760
 			auto& trampoline = SKSE::GetTrampoline();
-			_ProcessHit = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x3C0, 0x4A8), processHit);
+			std::uintptr_t site = hook.address() + RELOCATION_OFFSET(0x3C0, 0x4A8);
+			if (Hooks::IsRuntime17()) {
+				// 1.7: find the call to the hit function (AE id 38586) inside the collision function instead of trusting the 1.6 offset
+				const auto sites = FindCallsTo(hook.address(), 0x900, 38586);
+				for (const auto s : sites) {
+					logger::info("hook:OnMeleeHit processHit: call to id 38586 at +{:#x}", s - hook.address());
+				}
+				if (sites.size() != 1) {
+					logger::error("hook:OnMeleeHit processHit SKIPPED: found {} calls to id 38586 in id 38627, expected exactly one", sites.size());
+					return;
+				}
+				site = sites.front();
+			}
+			if (!CheckCallSite(site, "OnMeleeHit processHit")) {
+				return;
+			}
+			_ProcessHit = trampoline.write_call<5>(site, processHit);
 			logger::info("hook:OnMeleeHit");
 		}
 
@@ -143,7 +211,11 @@ namespace Hooks
 			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(37650, 38603) };  //SE:627930 + 38B AE:64D350 +  45A
 			auto& trampoline = SKSE::GetTrampoline();
 
-			_ProcessHit = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x38B, 0x45A), processHit);
+			const auto site = hook.address() + RELOCATION_OFFSET(0x38B, 0x45A);
+			if (!CheckCallSite(site, "OnMeleeCollision processHit")) {
+				return;
+			}
+			_ProcessHit = trampoline.write_call<5>(site, processHit);
 
 			logger::info("hook:OnMeleeCollision");
 		}
@@ -162,7 +234,11 @@ namespace Hooks
 			// REL ID 34188 (SE) / 34982 (AE) -> Handles incoming magic/shout/script stagger events
 			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(34188, 34982) };
 
-			_ProcessStagger = trampoline.write_call<5>(hook.address() + 0x6F, processStagger);
+			const auto site = hook.address() + 0x6F;
+			if (!CheckCallSite(site, "MagicStagger")) {
+				return;
+			}
+			_ProcessStagger = trampoline.write_call<5>(site, processStagger);
 			logger::info("hook:MagicStagger");
 		}
 
@@ -183,8 +259,13 @@ namespace Hooks
 
 			// Safely patch the call sites using the trampoline.
 			// Even though we don't call the originals, we MUST hold their return addresses to prevent stack mismatching.
-			_AggressorFunc = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x9A, 0xA1), AggressorThunk);
-			_TargetFunc = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0xAE, 0xB9), TargetThunk);
+			const auto aggressorSite = hook.address() + RELOCATION_OFFSET(0x9A, 0xA1);
+			const auto targetSite = hook.address() + RELOCATION_OFFSET(0xAE, 0xB9);
+			if (!CheckCallSite(aggressorSite, "PerkEntryBypass aggressor") || !CheckCallSite(targetSite, "PerkEntryBypass target")) {
+				return;  // both sites or none: the two thunks belong together
+			}
+			_AggressorFunc = trampoline.write_call<5>(aggressorSite, AggressorThunk);
+			_TargetFunc = trampoline.write_call<5>(targetSite, TargetThunk);
 
 			logger::info("hook:PerkEntryBypass");
 		}

@@ -367,7 +367,7 @@ bool blockHandler::tryParryProjectile_Spell(RE::Actor* a_blocker, RE::Projectile
 	onSuccessfulTimedBlock(a_blocker);
 	if (settings::bEnableBlockExp && a_blocker->IsPlayerRef()) {
 		if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-			pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fTimedBlockProjectileExp);
+			pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fTimedBlockProjectileExp, nullptr, 0);
 		}
 	}
 	float cost = a_projectile->GetProjectileRuntimeData().spell->CalculateMagickaCost(a_blocker);
@@ -400,7 +400,7 @@ bool blockHandler::tryParryProjectile_Arrow(RE::Actor* a_blocker, RE::Projectile
 	onSuccessfulTimedBlock(a_blocker);
 	if (settings::bEnableBlockExp && a_blocker->IsPlayerRef()) {
 		if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-			pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fTimedBlockProjectileExp);
+			pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fTimedBlockProjectileExp, nullptr, 0);
 		}
 	}
 	auto launcher = a_projectile->GetProjectileRuntimeData().weaponSource;
@@ -444,7 +444,7 @@ bool blockHandler::tryBlockProjectile_Spell(RE::Actor* a_blocker, RE::Projectile
 	if (Utils::Actor::tryDamageAv(a_blocker, RE::ActorValue::kMagicka, cost)) {
 		if (settings::bEnableBlockExp && a_blocker->IsPlayerRef()) {
 			if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-				pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fBlockProjectileExp);
+				pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fBlockProjectileExp, nullptr, 0);
 			}
 		}
 		if (Utils::Actor::isBlocking(a_blocker)) {
@@ -474,7 +474,7 @@ bool blockHandler::tryBlockProjectile_Arrow(RE::Actor* a_blocker, RE::Projectile
 	if (Utils::Actor::tryDamageAv(a_blocker, RE::ActorValue::kMagicka, cost)) {
 		if (settings::bEnableBlockExp && a_blocker->IsPlayerRef()) {
 			if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-				pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fBlockProjectileExp);
+				pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fBlockProjectileExp, nullptr, 0);
 			}
 		}
 		if (Utils::Actor::isBlocking(a_blocker)) {
@@ -592,7 +592,7 @@ bool blockHandler::processMeleeTimedBlock(RE::Actor* a_blocker, RE::Actor* a_att
 
 	if (settings::bEnableBlockExp && a_blocker->IsPlayerRef()) {
 		if (auto pc = RE::PlayerCharacter::GetSingleton()) {
-			pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fTimedBlockMeleeExp);
+			pc->AddSkillExperience(RE::ActorValue::kBlock, settings::fTimedBlockMeleeExp, nullptr, 0);
 		}
 	}
 

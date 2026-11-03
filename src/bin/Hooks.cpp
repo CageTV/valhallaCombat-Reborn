@@ -137,7 +137,9 @@ namespace Hooks
 		hitData.totalDamage *= mult;
 		hitData.physicalDamage *= mult;
 
-		hitProcessor::GetSingleton()->processHit(aggressor, victim, hitData);
+		if (hitProcessor::claimHit(aggressor, victim)) {
+			hitProcessor::GetSingleton()->processHit(aggressor, victim, hitData);
+		}
 
 		_ProcessHit(victim, hitData);
 	}
