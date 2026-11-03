@@ -1,0 +1,332 @@
+'vswhere.exe' is not recognized as an internal or external command,
+operable program or batch file.
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-windows-static-md...
+Compiler found: C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
+Detecting compiler hash for triplet x64-windows...
+Compiler found: C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe
+The following packages are already installed:
+  * asmjit:x64-windows-static-md@2025-10-13
+  * asmtk:x64-windows-static-md@2022-11-06#1
+    clib-util:x64-windows-static-md@1.4.0#1
+    clib-utils-qtr:x64-windows-static-md@1.0.0
+    detours:x64-windows-static-md@2025-06-20
+    directxmath:x64-windows-static-md@2026-05-15
+    directxtk:x64-windows-static-md@2026-05-07#1
+    fmt:x64-windows-static-md@12.1.0
+    glm:x64-windows-static-md@1.0.3
+    jsoncons:x64-windows-static-md@1.7.0
+    minhook:x64-windows-static-md@1.3.4
+    nlohmann-json:x64-windows-static-md@3.12.0#2
+    polyhook2[core,virtuals,pe,inlinentd,exception,detours]:x64-windows-static-md@2025-06-21
+    rapidcsv:x64-windows-static-md@8.97
+    rapidjson:x64-windows-static-md@2025-02-26
+    simpleini:x64-windows-static-md@4.25
+    skse-mcp:x64-windows-static-md@3.3.0#3
+    spdlog[core,tz-offset,fmt]:x64-windows-static-md@1.17.0
+    toml11:x64-windows-static-md@4.4.0
+  * vcpkg-cmake:x64-windows@2024-04-23
+  * vcpkg-cmake-config:x64-windows@2024-05-23
+    xbyak:x64-windows-static-md@7.28
+  * zycore:x64-windows-static-md@1.5.2
+  * zydis:x64-windows-static-md@4.1.1#1
+clib-util is header-only and can be used from CMake via:
+
+  find_path(CLIB_UTIL_INCLUDE_DIRS "ClibUtil/bitmasks.hpp")
+  target_include_directories(main PRIVATE ${CLIB_UTIL_INCLUDE_DIRS})
+
+clib-utils-qtr is header-only and can be used from CMake via:
+
+  find_path(CLIB_UTILS_QTR_INCLUDE_DIRS "CLibUtilsQTR/Animations.hpp")
+  target_include_directories(main PRIVATE ${CLIB_UTILS_QTR_INCLUDE_DIRS})
+
+detours can be used from CMake via:
+
+    find_path(DETOURS_INCLUDE_DIRS "detours/detours.h")
+    find_library(DETOURS_LIBRARY detours REQUIRED)
+
+    target_include_directories(main PRIVATE ${DETOURS_INCLUDE_DIRS})
+    target_link_libraries(main PRIVATE ${DETOURS_LIBRARY})
+
+The DirectXMath package provides CMake targets:
+
+    find_package(directxmath CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Microsoft::DirectXMath)
+
+The DirectX Tool Kit for DX11 package provides CMake targets:
+
+    find_package(directxtk CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Microsoft::DirectXTK)
+
+The package fmt provides CMake targets:
+
+    find_package(fmt CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE fmt::fmt)
+
+    # Or use the header-only version
+    find_package(fmt CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE fmt::fmt-header-only)
+
+The package glm provides CMake targets:
+
+    find_package(glm CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE glm::glm)
+
+    # Or use the header-only version
+    find_package(glm CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE glm::glm-header-only)
+
+jsoncons provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(jsoncons CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE jsoncons::jsoncons)
+
+minhook provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(minhook CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE minhook::minhook)
+
+The package nlohmann-json provides CMake targets:
+
+    find_package(nlohmann_json CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json)
+
+The package nlohmann-json can be configured to not provide implicit conversions via a custom triplet file:
+
+    set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
+
+For more information, see the docs here:
+    
+    https://json.nlohmann.me/api/macros/json_use_implicit_conversions/
+
+polyhook2 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(polyhook_2 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE PolyHook_2::PolyHook_2)
+
+rapidcsv provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(rapidcsv CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE rapidcsv::rapidcsv)
+
+rapidjson provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(RapidJSON CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE RapidJSON rapidjson)
+
+simpleini is header-only and can be used from CMake via:
+
+  find_path(SIMPLEINI_INCLUDE_DIRS "ConvertUTF.c")
+  target_include_directories(main PRIVATE ${SIMPLEINI_INCLUDE_DIRS})
+
+skse-mcp is header-only and can be used from CMake via:
+
+  find_path(SKSE_MCP_INCLUDE_DIRS "SKSEMCP/SKSEMenuFramework.hpp")
+  target_include_directories(main PRIVATE ${SKSE_MCP_INCLUDE_DIRS})
+
+The package spdlog provides CMake targets:
+
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog)
+
+    # Or use the header-only version
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE spdlog::spdlog_header_only)
+
+toml11 provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(toml11 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE toml11::toml11)
+
+xbyak provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(xbyak CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE xbyak::xbyak)
+
+All requested installations completed successfully in: 297 us
+-- Running vcpkg install - done
+Options:
+	Enable Xbyak: OFF
+	Enable Patch Safety Checks: ON
+	Enable Skyrim SE: ON
+	Enable Skyrim AE: ON
+	Enable Skyrim VR: OFF
+	Build Tests: OFF
+Parsing commonlibsse_plugin_version 1.2.0
+Setting major version to 1
+Setting minor version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 4.4.0
+Setting major version to 4
+Setting minor version to 4
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 4.4.0
+Setting major version to 4
+Setting minor version to 4
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.4.2
+Setting major version to 1
+Setting minor version to 4
+Setting patch version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.1
+Setting major version to 1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.2.2
+Setting major version to 1
+Setting minor version to 2
+Setting patch version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.1.0
+Setting major version to 1
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.1
+Setting major version to 1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.1.0
+Setting major version to 1
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+-- DebugMenu ng: skipping missing source src/Interface_prismaUI/InterfaceHandler.cpp
+Parsing commonlibsse_plugin_version 4.0.0
+Setting major version to 4
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.17.0.10
+Setting minor version to 17
+Setting tweak version to 10
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.4.2
+Setting minor version to 1
+Setting patch version to 4
+Setting tweak version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.0.1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.1
+Setting major version to 1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+-- ng plugin targets: Campfire;FrostfallRegular;FrostfallESL;LastSeed;PreditorFleeFire;GourmetAutoPatch;SimpleHunting;SkillsOfTheWild;DiseaseWidget;DebugMenu;BFCO_og;BFCO_ng;DynamicWind;InGamePatcher;ReadItNow;xEditLinker;StepUpOnto;WaterProbe;WaterWind
+Parsing commonlibsse_plugin_version 2.0.2
+Setting major version to 2
+Setting patch version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.0.2
+Setting patch version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.1.2.4228
+Setting major version to 1
+Setting minor version to 1
+Setting patch version to 2
+Setting tweak version to 4228
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.1
+Setting major version to 1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.1
+Setting major version to 1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 2.0.0
+Setting major version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.1.0
+Setting major version to 1
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.1
+Setting major version to 1
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 2.1.8
+Setting major version to 2
+Setting minor version to 1
+Setting patch version to 8
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 2.2.0
+Setting major version to 2
+Setting minor version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.1.0
+Setting major version to 1
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 1.0.0
+Setting major version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.2.1
+Setting minor version to 2
+Setting patch version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.2.0
+Setting minor version to 2
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.3.0
+Setting minor version to 3
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+Parsing commonlibsse_plugin_version 0.1.0
+Setting minor version to 1
+Parsing ADD_COMMONLIBSSE_PLUGIN_MINIMUM_SKSE_VERSION 0
+-- Configuring done (3.8s)
+-- Generating done (0.2s)
+-- Build files have been written to: E:/WorkSpace/ng-build/build/release
+[0/2] Re-checking globbed directories...
+[1/4] Building CXX object CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\ModAPI.cpp.obj
+[2/4] Building CXX object CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\main.cpp.obj
+[3/4] Linking CXX shared library out\ValhallaCombatReborn\ValhallaCombat.dll
+FAILED: [code=4294967295] out/ValhallaCombatReborn/ValhallaCombat.dll out/ValhallaCombatReborn/ValhallaCombat.lib 
+C:\WINDOWS\system32\cmd.exe /C "cd . && "C:\Program Files\CMake\bin\cmake.exe" -E vs_link_dll --msvc-ver=1951 --intdir=CMakeFiles\ValhallaCombatReborn.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100261~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100261~1.0\x64\mt.exe --manifests  -- C:\PROGRA~1\MICROS~3\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\Hostx64\x64\link.exe /nologo CMakeFiles\ValhallaCombatReborn.dir\cmake_pch.cxx.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\AI.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\AILearning.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\Hooks.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\ModAPI.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\Papyrus.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\PoiseDamageCalculator.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\PoiseHealthHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\StaggerHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\Utils.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\attackHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\blockHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\data.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\debuffHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\actorDeathEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\animEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\cellLoadEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\combatEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\inputEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\executionHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\hitProcessor.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\main.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\parryHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\perks.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\poiseHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\reactionHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\settings.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\specialAttackHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\staminaHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\stunHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\__ValhallaCombatRebornPlugin.cpp.obj  /out:out\ValhallaCombatReborn\ValhallaCombat.dll /implib:out\ValhallaCombatReborn\ValhallaCombat.lib /pdb:out\ValhallaCombatReborn\ValhallaCombat.pdb /dll /version:0.0 /machine:x64 /INCREMENTAL:NO /DEBUG /OPT:REF /OPT:ICF  CommonLibSSE\CommonLibSSE.lib  vcpkg_installed\x64-windows-static-md\lib\spdlog.lib  vcpkg_installed\x64-windows-static-md\lib\fmt.lib  vcpkg_installed\x64-windows-static-md\lib\DirectXTK.lib  advapi32.lib  bcrypt.lib  D3D11.lib  d3dcompiler.lib  dbghelp.lib  DXGI.lib  ole32.lib  version.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && C:\WINDOWS\system32\cmd.exe /C "cd /D E:\WorkSpace\ng-build\build\release && C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file C:/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/WorkSpace/ng-build/build/release/out/ValhallaCombatReborn/ValhallaCombat.dll -installedDir E:/WorkSpace/ng-build/build/release/vcpkg_installed/x64-windows-static-md/bin -OutVariable out""
+LINK: command "C:\PROGRA~1\MICROS~3\18\COMMUN~1\VC\Tools\MSVC\1451~1.362\bin\Hostx64\x64\link.exe /nologo CMakeFiles\ValhallaCombatReborn.dir\cmake_pch.cxx.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\AI.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\AILearning.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\Hooks.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\ModAPI.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\Papyrus.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\PoiseDamageCalculator.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\PoiseHealthHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\StaggerHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\Utils.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\attackHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\blockHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\data.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\debuffHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\actorDeathEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\animEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\cellLoadEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\combatEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\events\inputEventHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\executionHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\hitProcessor.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\main.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\parryHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\perks.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\poiseHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\reactionHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\settings.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\specialAttackHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\staminaHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\E_\WorkSpace\valhallaCombat-Reborn\src\bin\stunHandler.cpp.obj CMakeFiles\ValhallaCombatReborn.dir\__ValhallaCombatRebornPlugin.cpp.obj /out:out\ValhallaCombatReborn\ValhallaCombat.dll /implib:out\ValhallaCombatReborn\ValhallaCombat.lib /pdb:out\ValhallaCombatReborn\ValhallaCombat.pdb /dll /version:0.0 /machine:x64 /INCREMENTAL:NO /DEBUG /OPT:REF /OPT:ICF CommonLibSSE\CommonLibSSE.lib vcpkg_installed\x64-windows-static-md\lib\spdlog.lib vcpkg_installed\x64-windows-static-md\lib\fmt.lib vcpkg_installed\x64-windows-static-md\lib\DirectXTK.lib advapi32.lib bcrypt.lib D3D11.lib d3dcompiler.lib dbghelp.lib DXGI.lib ole32.lib version.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST:EMBED,ID=2" failed (exit code 1169) with the following output:
+__ValhallaCombatRebornPlugin.cpp.obj : error LNK2005: SKSEPlugin_Query already defined in main.cpp.obj
+__ValhallaCombatRebornPlugin.cpp.obj : error LNK2005: SKSEPlugin_Version already defined in main.cpp.obj
+   Creating library out\ValhallaCombatReborn\ValhallaCombat.lib and object out\ValhallaCombatReborn\ValhallaCombat.exp
+out\ValhallaCombatReborn\ValhallaCombat.dll : fatal error LNK1169: one or more multiply defined symbols found
+ninja: build stopped: subcommand failed.
