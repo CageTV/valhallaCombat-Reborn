@@ -1,0 +1,245 @@
+#include "SimpleIni.h"
+#include "include/Hooks.h"
+#include "include/Papyrus.h"
+#include "include/data.h"
+#include "include/events.h"
+#include "include/lib/TrueHUDAPI.h"
+#include "ValhallaCombat.hpp"
+#include "include/settings.h"
+#include "include/Utils.h"
+#include "include/lib/ValhallaCombatAPI.h"
+#include "include/AILearning.h"
+#include "include/AI.h"
+#include "include/ModAPI.h"
+#include "include/attackHandler.h"
+
+// Global Guard
+static bool g_hooksInstalled = false;
+
+void initTrueHUDAPI() {
+	auto val = ValhallaCombat::GetSingleton();
+	val->ersh_TrueHUD = reinterpret_cast<TRUEHUD_API::IVTrueHUD3*>(
+		TRUEHUD_API::RequestPluginAPI(TRUEHUD_API::InterfaceVersion::V3));
+
+	if (val->ersh_TrueHUD) {
+		logger::info("Obtained TruehudAPI - {0:x}", (uintptr_t)val->ersh_TrueHUD);
+		settings::facts::TrueHudAPI_Obtained = true;
+	}
+	else {
+		logger::info("TrueHUD API not found.");
+		settings::facts::TrueHudAPI_Obtained = false;
+	}
+}
+
+void initPrecisionAPI() {
+	auto val = ValhallaCombat::GetSingleton();
+	val->ersh_Precision = reinterpret_cast<PRECISION_API::IVPrecision1*>(
+		PRECISION_API::RequestPluginAPI(PRECISION_API::InterfaceVersion::V1));
+
+	if (val->ersh_Precision) {
+		logger::info("Obtained PrecisionAPI - {0:x}", (uintptr_t)val->ersh_Precision);
+		settings::facts::PrecisionAPI_Obtained = true;
+
+		auto res = val->ersh_Precision->AddPreHitCallback(
+			SKSE::GetPluginHandle(),
+			blockHandler::precisionPrehitCallbackFunc
+		);
+
+		if (res == PRECISION_API::APIResult::OK ||
+			res == PRECISION_API::APIResult::AlreadyRegistered) {
+			logger::info("Collision prehit callback successfully registered.");
+		}
+	}
+	else {
+		logger::info("Precision API not found.");
+		settings::facts::PrecisionAPI_Obtained = false;
+	}
+}
+
+void onDataLoaded()
+{
+	// Guard against double hook install
+	if (g_hooksInstalled) {
+		logger::warn("Hooks already installed - skipping duplicate initialization");
+		return;
+	}
+	g_hooksInstalled = true;
+
+	logger::info("=== FIRST TIME INITIALIZATION START ===");
+
+	// Behavior Data Injector Validation
+	static constexpr auto bdiDLLName = "BehaviorDataInjector.dll";
+	if (!GetModuleHandleA(bdiDLLName)) {
+		logger::critical("CRITICAL DEPENDENCY MISSING: Poise components require '{}' to track custom graph variables!", bdiDLLName);
+	}
+	else {
+		logger::info("Dependency Verified: '{}' successfully linked for unified poise management.", bdiDLLName);
+	}
+
+	// Installs Hooks
+	Hooks::install();
+
+	settings::init();
+	settings::readSettings();
+	events::registerAllEventHandlers();
+	data::loadData();
+	blockHandler::EldenCounterCompatibility::attemptInit();
+
+	logger::info("=== FIRST TIME INITIALIZATION COMPLETE ===");
+}
+
+void onPostLoad() {
+	logger::info("Initializing API fetch...");
+	initTrueHUDAPI();
+	initPrecisionAPI();
+	logger::info("...done");
+}
+
+void onPostLoadGame() {
+	auto* player = RE::PlayerCharacter::GetSingleton();
+	if (player) {
+		Utils::Actor::safeApplyPerk(data::debuffPerk, player);
+		Utils::Actor::safeApplyPerk(data::stunDebuffPerk, player);
+	}
+	debuffHandler::GetSingleton()->reset();
+	stunHandler::GetSingleton()->reset();
+	attackHandler::GetSingleton()->reset();
+	poiseHandler::GetSingleton()->reset();
+	parryHandler::GetSingleton()->reset();
+	blockHandler::GetSingleton()->reset();
+	BlockCommitment::GetSingleton()->reset();
+	AILearning::GetSingleton()->reset();
+	AI::GetSingleton()->reset();
+	SpecialAttackHandler::GetSingleton()->reset();
+	settings::updateGlobals();
+}
+
+void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
+{
+	switch (a_msg->type) {
+	case SKSE::MessagingInterface::kDataLoaded:
+		onDataLoaded();
+		break;
+
+	case SKSE::MessagingInterface::kPostLoad:
+		onPostLoad();
+		break;
+
+	case SKSE::MessagingInterface::kNewGame:
+	case SKSE::MessagingInterface::kPostLoadGame:
+		onPostLoadGame();
+		break;
+	}
+}
+
+void onSKSEInit()
+{
+	Papyrus::Register();
+}
+
+namespace
+{
+	void InitializeLog()
+	{
+		auto path = logger::log_directory();
+		if (!path) {
+			util::report_and_fail("Failed to find standard logging directory"sv);
+		}
+
+		*path /= fmt::format("{}.log"sv, Plugin::NAME);
+		auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
+
+		// Set log level (use spdlog::level::trace for extra verbose logging)
+		const auto level = spdlog::level::info;
+
+		auto log = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
+		log->set_level(level);
+		log->flush_on(level); // Immediately writes every log entry to disk
+
+		spdlog::set_default_logger(std::move(log));
+		spdlog::set_pattern("%s(%#): [%^%l%$] %v"s);
+	}
+}
+
+std::string wstring2string(const std::wstring& wstr, UINT CodePage)
+{
+	std::string ret;
+	int len = WideCharToMultiByte(CodePage, 0, wstr.c_str(), (int)wstr.size(), NULL, 0, NULL, NULL);
+	ret.resize((size_t)len, 0);
+	WideCharToMultiByte(CodePage, 0, wstr.c_str(), (int)wstr.size(), &ret[0], len, NULL, NULL);
+	return ret;
+}
+
+SKSEPluginQuery(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
+{
+	a_info->infoVersion = SKSE::PluginInfo::kVersion;
+	a_info->name = Plugin::NAME.data();
+	a_info->version = Plugin::VERSION[0];
+
+	if (a_skse->IsEditor()) {
+		logger::critical("Loaded in editor, marking as incompatible"sv);
+		return false;
+	}
+
+	const auto ver = a_skse->RuntimeVersion();
+	if (ver < SKSE::RUNTIME_SSE_1_5_39) {
+		logger::critical(FMT_STRING("Unsupported runtime version {}"), ver.string());
+		return false;
+	}
+
+	return true;
+}
+
+SKSEPluginVersion = []() {
+	SKSE::PluginVersionData v;
+
+	v.PluginVersion(Plugin::VERSION);
+	v.PluginName(Plugin::NAME);
+	v.AuthorName("MichelKI");
+	v.UsesAddressLibrary();
+	v.CompatibleVersions({ SKSE::RUNTIME_SSE_LATEST });
+	v.UsesNoStructs();
+
+	return v;
+}();
+
+SKSEPluginLoad(const SKSE::LoadInterface* a_skse)
+{
+#ifndef NDEBUG
+	while (!IsDebuggerPresent()) {
+		Sleep(100);
+	}
+#endif
+	REL::Module::reset();
+
+	InitializeLog();
+
+	logger::info("Plugin loaded");
+
+	SKSE::Init(a_skse);
+
+	if (!SKSE::GetMessagingInterface()->RegisterListener("SKSE", MessageHandler)) {
+		logger::critical("Failed to register messaging listener");
+		return false;
+	}
+
+	onSKSEInit();
+
+	return true;
+}
+
+extern "C" DLLEXPORT void* RequestPluginAPI(const VAL_API::InterfaceVersion a_interfaceVersion)
+{
+	auto api = ModAPI::VALInterface::GetSingleton();
+	logger::info("ValhallaCombat::RequestPluginAPI called");
+
+	switch (a_interfaceVersion) {
+	case VAL_API::InterfaceVersion::V1:
+	case VAL_API::InterfaceVersion::V2:
+	case VAL_API::InterfaceVersion::V3:
+		logger::info("ValhallaCombat::RequestPluginAPI returned the API singleton");
+		return static_cast<void*>(api);
+	}
+	logger::info("ValhallaCombat::RequestPluginAPI requested the wrong interface version");
+	return nullptr;
+}

@@ -1,0 +1,2898 @@
+{
+  "modName": "ValhallaCombat",
+  "displayName": "$ValhallaCombat",
+  "minMcmVersion": 9,
+  "pages": [
+    {
+      "pageDisplayName": "$Val_Stamina_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_Stamina_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A25"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_Obtained_InfoText",
+          "groupCondition": 3,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_Obtained_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_FailToObtain_InfoText",
+          "groupCondition": { "NOT": 3 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_FailToObtain_ValueText"
+          }
+        },
+        {
+          "id": "bUIalert:Stamina",
+          "text": "$Val_UI_Alert_Text",
+          "type": "toggle",
+          "help": "$Val_UI_Alert__Help",
+          "groupCondition": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bStaminaDebuffToggle:Stamina",
+          "text": "$Val_StaminaDebuff_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_StaminaDebuff_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bExhaustionBlockSprintRun:Stamina",
+          "text": "$Val_ExhaustionBlockSprintRun_Text",
+          "type": "toggle",
+          "help": "$Val_ExhaustionBlockSprintRun_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bExhaustionBlockAttacks:Stamina",
+          "text": "$Val_ExhaustionBlockAttacks_Text",
+          "type": "toggle",
+          "help": "$Val_ExhaustionBlockAttacks_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fBlockLockoutDuration_NPC:Stamina",
+          "text": "$Val_NpcBlockLockoutDuration_Text",
+          "help": "$Val_NpcBlockLockoutDuration_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fExhaustionBlockDuration_NPC:Stamina",
+          "text": "$Val_NpcExhaustionBlockDuration_Text",
+          "help": "$Val_NpcExhaustionBlockDuration_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenMult:Stamina",
+          "text": "$Val_Stamina_Mult_Text",
+          "help": "$Val_Stamina_Mult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenLimit:Stamina",
+          "text": "$Val_Stamina_Limit_Text",
+          "help": "$Val_Stamina_Limit_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 20,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenMin:Stamina",
+          "text": "$Val_Stamina_Limit_Min_Text",
+          "help": "$Val_Stamina_Limit_Min_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 20,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fCombatStaminaRegenMult:Stamina",
+          "text": "$Val_Combat_Stamina_Mult_Text",
+          "help": "$Val_Combat_Stamina_Mult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBlockingStaminaRegenMult:Stamina",
+          "text": "$Val_Blocking_Stamina_Mult_Text",
+          "help": "$Val_Blocking_Stamina_Mult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenDelay:Stamina",
+          "text": "$Val_Stamina_Delay_Text",
+          "help": "$Val_Stamina_Delay_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Atk_Header_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "bNonCombatStaminaCost:Stamina",
+          "text": "$Val_Non_Combat_Stamina_Cost_Text",
+          "type": "toggle",
+          "help": "$Val_Non_Combat_Stamina_Cost_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "$Val_Atk_LightAttacks_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "uLightAttackStaminaMode:Stamina",
+          "text": "$Val_Atk_Toggle_Text",
+          "type": "enum",
+          "help": "$Val_Atk_LightAttackMode_Help",
+          "groupControl": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "options": [
+              "$Val_Atk_Option_Disabled_Text",
+              "$Val_Atk_Option_Legacy_Text",
+              "$Val_Atk_Option_HitFrame_Text"
+            ]
+          }
+        },
+        {
+          "id": "bAttackStaminaToggle_NPC:Stamina",
+          "text": "$Val_Atk_Toggle_NPC_Text",
+          "type": "toggle",
+          "help": "$Val_Atk_Toggle_NPC_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bBlockedHitRegenStamina:Stamina",
+          "text": "$Val_Blocked_Count_As_Hit_Text",
+          "type": "toggle",
+          "help": "$Val_Blocked_Count_As_Hit_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bLightAttackPerkMult:Stamina",
+          "text": "$Val_Atk_LightPerkMult_Text",
+          "type": "toggle",
+          "help": "$Val_Atk_LightPerkMult_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostLight_Base:Stamina",
+          "text": "$Val_Melee_Light_BaseCost_Text",
+          "help": "$Val_Melee_Light_BaseCost_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostLight_WeightMult:Stamina",
+          "text": "$Val_Melee_Light_WeightMult_Text",
+          "help": "$Val_Melee_Light_WeightMult_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fAdditionalHitFrameCostMult:Stamina",
+          "text": "$Val_AdditionalHitFrameCostMult_Text",
+          "help": "$Val_AdditionalHitFrameCostMult_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeRewardLightHit_Point:Stamina",
+          "text": "$Val_Melee_Light_Hit_Point_Text",
+          "help": "$Val_Melee_Light_Hit_Point_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeRewardLightHit_WeightMult:Stamina",
+          "text": "$Val_Melee_Light_Hit_WeightMult_Text",
+          "help": "$Val_Melee_Light_Hit_WeightMult_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeRewardLightHit_Percent:Stamina",
+          "text": "$Val_Melee_Light_Hit_Text",
+          "help": "$Val_Melee_Light_Hit_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fAdditionalHitFrameRewardMult:Stamina",
+          "text": "$Val_AdditionalHitFrameRewardMult_Text",
+          "help": "$Val_AdditionalHitFrameRewardMult_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Atk_PowerAttacks_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bUseCustomPowerAttackCost:Stamina",
+          "text": "$Val_UseCustomPowerAttackCost_Text",
+          "type": "toggle",
+          "help": "$Val_UseCustomPowerAttackCost_Help",
+          "groupControl": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPowerAttackPerkMult:Stamina",
+          "text": "$Val_PowerAttackPerkMult_Text",
+          "type": "toggle",
+          "help": "$Val_PowerAttackPerkMult_Help",
+          "groupCondition": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostPower_Base:Stamina",
+          "text": "$Val_Melee_Power_BaseCost_Text",
+          "help": "$Val_Melee_Power_BaseCost_Help",
+          "type": "slider",
+          "groupCondition": 2,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostPower_WeightMult:Stamina",
+          "text": "$Val_Melee_Power_WeightMult_Text",
+          "help": "$Val_Melee_Power_WeightMult_Help",
+          "type": "slider",
+          "groupCondition": 2,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Atk_LightBashes_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bUseCustomLightBashCost:Stamina",
+          "text": "$Val_UseCustomLightBashCost_Text",
+          "type": "toggle",
+          "help": "$Val_UseCustomLightBashCost_Help",
+          "groupControl": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bSuccessfulParryNoCost:Stamina",
+          "text": "$Val_SuccessfulParryNoCost_Text",
+          "type": "toggle",
+          "help": "$Val_SuccessfulParryNoCost_Help",
+          "groupCondition": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bLightBashPerkMult:Stamina",
+          "text": "$Val_LightBashPerkMult_Text",
+          "type": "toggle",
+          "help": "$Val_LightBashPerkMult_Help",
+          "groupCondition": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostLightBash_Base:Stamina",
+          "text": "$Val_Melee_LightBash_BaseCost_Text",
+          "help": "$Val_Melee_LightBash_BaseCost_Help",
+          "type": "slider",
+          "groupCondition": 4,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostLightBash_WeightMult:Stamina",
+          "text": "$Val_Melee_LightBash_WeightMult_Text",
+          "help": "$Val_Melee_LightBash_WeightMult_Help",
+          "type": "slider",
+          "groupCondition": 4,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Atk_PowerBashes_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bUseCustomPowerBashCost:Stamina",
+          "text": "$Val_UseCustomPowerBashCost_Text",
+          "type": "toggle",
+          "help": "$Val_UseCustomPowerBashCost_Help",
+          "groupControl": 5,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPowerBashPerkMult:Stamina",
+          "text": "$Val_PowerBashPerkMult_Text",
+          "type": "toggle",
+          "help": "$Val_PowerBashPerkMult_Help",
+          "groupCondition": 5,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostPowerBash_Base:Stamina",
+          "text": "$Val_Melee_PowerBash_BaseCost_Text",
+          "help": "$Val_Melee_PowerBash_BaseCost_Help",
+          "type": "slider",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostPowerBash_WeightMult:Stamina",
+          "text": "$Val_Melee_PowerBash_WeightMult_Text",
+          "help": "$Val_Melee_PowerBash_WeightMult_Help",
+          "type": "slider",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Bck_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bBlockStaminaToggle:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_Bck_StaminaBlocking_Toggle_Help",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bGuardBreak:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_GuardBreak_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_Bck_StaminaBlocking_GuardBreak_Toggle_Help",
+          "groupCondition": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "$Val_Bck_StaminaBlocking_Shd_Mult_Header_Text",
+          "help": "$Val_Bck_StaminaBlocking_Shd_Mult_Header_Help",
+          "type": "header"
+        },
+        {
+          "id": "fBckShdStaminaMult_PC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_Player_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckShdStaminaMult_NPC_Block_PC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_Player_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckShdStaminaMult_NPC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Bck_StaminaBlocking_Wpn_Mult_Header_Text",
+          "help": "$Val_Bck_StaminaBlocking_Wpn_Mult_Header_Help",
+          "type": "header"
+        },
+        {
+          "id": "fBckWpnStaminaMult_PC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_Player_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckWpnStaminaMult_NPC_Block_PC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_Player_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckWpnStaminaMult_NPC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$Val_TimedBlocking_Page_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bTimedBlockToggle:TimedBlocking",
+          "text": "$Val_TimedBlocking_Toggle_Text",
+          "help": "$Val_TimedBlocking_Toggle_Help",
+          "type": "toggle",
+          "groupControl": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bBlockProjectileToggle:TimedBlocking",
+          "text": "$Val_TimedBlocking_Projectile_Text",
+          "help": "$Val_TimedBlocking_Projectile_Help",
+          "type": "toggle",
+          "groupControl": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bTimedBlockProjectileToggle:TimedBlocking",
+          "text": "$Val_TimedBlocking_Projectile_Timed_Toggle_Text",
+          "help": "$Val_TimedBlocking_Projectile_Timed_Toggle_Help",
+          "type": "toggle",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bTimedBlockToggle_NPC:TimedBlocking",
+          "text": "$Val_TimedBlocking_Toggle_NPC_Text",
+          "type": "toggle",
+          "groupCondition": 1,
+          "help": "$Val_TimedBlocking_Toggle_NPC_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bBlockProjectileToggle_NPC:TimedBlocking",
+          "text": "$Val_TimedBlocking_Projectile_NPC_Text",
+          "help": "$Val_TimedBlocking_Projectile_NPC_Help",
+          "type": "toggle",
+          "groupCondition": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bTimedBlockProjectileToggle_NPC:TimedBlocking",
+          "text": "$Val_TimedBlocking_Projectile_Timed_NPC_Text",
+          "help": "$Val_TimedBlocking_Projectile_Timed_NPC_Help",
+          "type": "toggle",
+          "groupCondition": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bWeaponBlockArrow:TimedBlocking",
+          "text": "$Val_WeaponBlockArrow_Text",
+          "type": "toggle",
+          "help": "$Val_WeaponBlockArrow_Help",
+          "groupCondition": { "OR": [ 2, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bWeaponBlockSpell:TimedBlocking",
+          "text": "$Val_WeaponBlockSpell_Text",
+          "type": "toggle",
+          "help": "$Val_WeaponBlockSpell_Help",
+          "groupCondition": { "OR": [ 2, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bShieldBlockArrow:TimedBlocking",
+          "text": "$Val_ShieldBlockArrow_Text",
+          "type": "toggle",
+          "help": "$Val_ShieldBlockArrow_Help",
+          "groupCondition": { "OR": [ 2, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bShieldBlockSpell:TimedBlocking",
+          "text": "$Val_ShieldBlockSpell_Text",
+          "type": "toggle",
+          "help": "$Val_ShieldBlockSpell_Help",
+          "groupCondition": { "OR": [ 2, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPerfectBlockStaminaRegen:TimedBlocking",
+          "text": "$Val_PerfectBlockStamina_Text",
+          "type": "toggle",
+          "help": "$Val_PerfectBlockStamina_Help",
+          "groupControl": 9,
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPerfectBlockStaminaRegenExhaustion:TimedBlocking",
+          "text": "$Val_PerfectBlockStaminaExhaustion_Text",
+          "type": "toggle",
+          "help": "$Val_PerfectBlockStaminaExhaustion_Help",
+          "groupCondition": {
+            "OR": [ 1, 3 ],
+            "AND": [ 9 ]
+          },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fTimedBlockWindow:TimedBlocking",
+          "text": "$Val_TimedBlocking_Time_Text",
+          "help": "$Val_TimedBlocking_Time_Help",
+          "type": "slider",
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPerfectBlockWindow:TimedBlocking",
+          "text": "$Val_TimedBlocking_PerfectTime_Text",
+          "help": "$Val_TimedBlocking_PerfectTime_Help",
+          "type": "slider",
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockCooldownTime:TimedBlocking",
+          "text": "$Val_TimedBlocking_Cooldown_Text",
+          "help": "$Val_TimedBlocking_Cooldown_Help",
+          "type": "slider",
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockStaminaCostMult:TimedBlocking",
+          "text": "$Val_TimedBlocking_StaminaCostMult_Text",
+          "help": "$Val_TimedBlocking_StaminaCostMult_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_TimedBlocking_Commitment_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bBlockCommitmentToggle:TimedBlocking",
+          "text": "$Val_TimedBlocking_Commitment_Toggle_Text",
+          "help": "$Val_TimedBlocking_Commitment_Toggle_Help",
+          "type": "toggle",
+          "groupControl": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bBlockCommitmentToggle_NPC:TimedBlocking",
+          "text": "$Val_TimedBlocking_Commitment_NPC_Text",
+          "help": "$Val_TimedBlocking_Commitment_NPC_Help",
+          "type": "toggle",
+          "groupCondition": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fBlockCommitmentTime:TimedBlocking",
+          "text": "$Val_TimedBlocking_Commitment_Time_Text",
+          "help": "$Val_TimedBlocking_Commitment_Time_Help",
+          "type": "slider",
+          "groupCondition": 4,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Tackle_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bTackleToggle:TimedBlocking",
+          "text": "$Val_TimedBlocking_Tackle_Toggle_Text",
+          "help": "$Val_Tackle_Help",
+          "type": "toggle",
+          "groupControl": 5,
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bTackleToggle_NPC:TimedBlocking",
+          "text": "$Val_Tackle_NPC_Text",
+          "help": "$Val_Tackle_NPC_Help",
+          "type": "toggle",
+          "groupCondition": 5,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fTackleWindow:TimedBlocking",
+          "text": "$Val_TackleWindow_Text",
+          "type": "slider",
+          "help": "$Val_TackleWindow_Help",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTackleCooldownTime:TimedBlocking",
+          "text": "$Val_TackleCooldown_Text",
+          "type": "slider",
+          "help": "$Val_TackleCooldown_Help",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 10.0,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Experience_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bEnableBlockExp:TimedBlocking",
+          "text": "$Val_EnableBlockExp_Text",
+          "type": "toggle",
+          "help": "$Val_EnableBlockExp_Help",
+          "groupControl": 6,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fTimedBlockMeleeExp:TimedBlocking",
+          "text": "$Val_TimedBlockMeleeExp_Text",
+          "type": "slider",
+          "help": "$Val_TimedBlockMeleeExp_Help",
+          "groupCondition": 6,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 50.0,
+            "step": 0.5,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockProjectileExp:TimedBlocking",
+          "text": "$Val_TimedBlockProjectileExp_Text",
+          "type": "slider",
+          "help": "$Val_TimedBlockProjectileExp_Help",
+          "groupCondition": 6,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 50.0,
+            "step": 0.5,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBlockProjectileExp:TimedBlocking",
+          "text": "$Val_BlockProjectileExp_Text",
+          "type": "slider",
+          "help": "$Val_BlockProjectileExp_Help",
+          "groupCondition": 6,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 50.0,
+            "step": 0.5,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_TimedBlocking_Effect_Header_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "uTimedBlockSparkType:TimedBlocking",
+          "text": "$Val_TimedBlocking_TimedBlockSparkType_Text",
+          "help": "$Val_TimedBlocking_TimedBlockSparkType_Help",
+          "type": "enum",
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "options": [
+              "$Val_TimedBlocking_TimedBlockSparkType_Off_Text",
+              "$Val_TimedBlocking_TimedBlockSparkType_Fantasy_Text",
+              "$Val_TimedBlocking_TimedBlockSparkType_Realism_Text"
+            ],
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "id": "bTimedBlockScreenShake:TimedBlocking",
+          "text": "$Val_TimedBlocking_ScreenShake_Text",
+          "type": "toggle",
+          "help": "",
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bTimeBlockSFX:TimedBlocking",
+          "text": "$Val_TimedBlocking_SFX_Text",
+          "help": "$Val_TimedBlocking_SFX_Help",
+          "type": "toggle",
+          "groupControl": 7,
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fTimedBlockSFXVolume:TimedBlocking",
+          "text": "$Val_TimedBlocking_SFX_Volume_Text",
+          "help": "$Val_TimedBlocking_SFX_Volume_Help",
+          "type": "slider",
+          "groupCondition": {
+            "OR": [ 1, 3 ],
+            "AND": [ 7 ]
+          },
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "bTimedBlockSlowTime:TimedBlocking",
+          "type": "toggle",
+          "text": "$Val_TimedBlocking_SlowTime_Text",
+          "help": "$Val_TimedBlocking_SlowTime_Help",
+          "groupCondition": { "OR": [ 1, 3 ] },
+          "groupControl": 8,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fTimedBlockSlowTimePercentage:TimedBlocking",
+          "text": "$Val_TimedBlocking_SlowTimePercentage_Text",
+          "help": "$Val_TimedBlocking_SlowTimePercentage_Help",
+          "type": "slider",
+          "groupCondition": {
+            "OR": [ 1, 3 ],
+            "AND": [ 8 ]
+          },
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockSlowTime_Timed:TimedBlocking",
+          "text": "$Val_TimedBlocking_SlowTime_Timed_Text",
+          "help": "$Val_TimedBlocking_SlowTime_Timed_Help",
+          "type": "slider",
+          "groupCondition": {
+            "OR": [ 1, 3 ],
+            "AND": [ 8 ]
+          },
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockSlowTime_Perfect:TimedBlocking",
+          "text": "$Val_TimedBlocking_SlowTime_Perfect_Text",
+          "help": "$Val_TimedBlocking_SlowTime_Perfect_Help",
+          "type": "slider",
+          "groupCondition": {
+            "OR": [ 1, 3 ],
+            "AND": [ 8 ]
+          },
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$Val_Parry_Page_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bParryToggle:Parry",
+          "text": "$Val_Parry_Toggle_Text",
+          "type": "toggle",
+          "groupControl": 1,
+          "help": "$Val_Parry_Toggle_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bParryToggle_NPC:Parry",
+          "text": "$Val_Parry_NPC_Toggle_Text",
+          "type": "toggle",
+          "groupCondition": 1,
+          "help": "$Val_Parry_NPC_Toggle_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bEnableProjectileParry:Parry",
+          "text": "$Val_ProjectileParry_Toggle_Text",
+          "type": "toggle",
+          "groupControl": 2,
+          "groupCondition": 1,
+          "help": "$Val_ProjectileParry_Toggle_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bEnableProjectileParry_NPC:Parry",
+          "text": "$Val_ProjectileParry_NPC_Toggle_Text",
+          "type": "toggle",
+          "groupCondition": 2,
+          "help": "$Val_ProjectileParry_NPC_Toggle_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bWeaponParryArrow:Parry",
+          "text": "$Val_WeaponParryArrow_Text",
+          "type": "toggle",
+          "help": "$Val_WeaponParryArrow_Help",
+          "groupCondition": {
+            "AND": [ 1, 2 ]
+          },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bWeaponParrySpell:Parry",
+          "text": "$Val_WeaponParrySpell_Text",
+          "type": "toggle",
+          "help": "$Val_WeaponParrySpell_Help",
+          "groupCondition": {
+            "AND": [ 1, 2 ]
+          },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bShieldParryArrow:Parry",
+          "text": "$Val_ShieldParryArrow_Text",
+          "type": "toggle",
+          "help": "$Val_ShieldParryArrow_Help",
+          "groupCondition": {
+            "AND": [ 1, 2 ]
+          },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bShieldParrySpell:Parry",
+          "text": "$Val_ShieldParrySpell_Text",
+          "type": "toggle",
+          "help": "$Val_ShieldParrySpell_Help",
+          "groupCondition": {
+            "AND": [ 1, 2 ]
+          },
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fParryWindow_Start:Parry",
+          "text": "$Val_ParryWindow_Start_Text",
+          "type": "slider",
+          "help": "$Val_ParryWindow_Start_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fParryWindow_End:Parry",
+          "text": "$Val_ParryWindow_End_Text",
+          "type": "slider",
+          "help": "$Val_ParryWindow_End_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "bEnableGuardBash:Parry",
+          "text": "$Val_EnableGuardBash_Text",
+          "type": "toggle",
+          "help": "$Val_EnableGuardBash_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "$Val_Experience_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bEnableParryExp:Parry",
+          "text": "$Val_EnableParryExp_Text",
+          "type": "toggle",
+          "groupCondition": 1,
+          "groupControl": 3,
+          "help": "$Val_EnableParryExp_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fParryMeleeExp:Parry",
+          "text": "$Val_ParryMeleeExp_Text",
+          "type": "slider",
+          "help": "$Val_ParryMeleeExp_Help",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 50.0,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fParryProjectileExp:Parry",
+          "text": "$Val_ParryProjectileExp_Text",
+          "type": "slider",
+          "help": "$Val_ParryProjectileExp_Help",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0.0,
+            "max": 50.0,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_TimedBlocking_Effect_Header_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "uParrySparkType:Parry",
+          "text": "$Val_TimedBlocking_TimedBlockSparkType_Text",
+          "type": "enum",
+          "help": "$Val_Parry_SparkStyle_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "options": [
+              "$Val_TimedBlocking_TimedBlockSparkType_Off_Text",
+              "$Val_TimedBlocking_TimedBlockSparkType_Fantasy_Text",
+              "$Val_TimedBlocking_TimedBlockSparkType_Realism_Text"
+            ],
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "id": "bParryScreenShake:Parry",
+          "text": "$Val_TimedBlocking_ScreenShake_Text",
+          "type": "toggle",
+          "help": "",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bParrySFX:Parry",
+          "text": "$Val_TimedBlocking_SFX_Text",
+          "type": "toggle",
+          "groupCondition": 1,
+          "groupControl": 4,
+          "help": "$Val_Parry_SFX_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fParrySFXVolume:Parry",
+          "text": "$Val_TimedBlocking_SFX_Volume_Text",
+          "type": "slider",
+          "help": "$Val_Parry_SFX_Volume_Help",
+          "groupCondition": 4,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "bParrySlowTime:Parry",
+          "text": "$Val_TimedBlocking_SlowTime_Text",
+          "type": "toggle",
+          "groupCondition": 1,
+          "groupControl": 5,
+          "help": "$Val_Parry_SlowTime_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fParrySlowTimePercentage:Parry",
+          "text": "$Val_Parry_SlowTimePercentage_Text",
+          "type": "slider",
+          "help": "$Val_Parry_SlowTimePercentage_Help",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fParrySlowTimeDuration:Parry",
+          "text": "$Val_Parry_SlowTimeDuration_Text",
+          "type": "slider",
+          "help": "$Val_Parry_SlowTimeDuration_Help",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$Val_Stun_Page_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bStunToggle:Stun",
+          "text": "$Val_Stun_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_Stun_Toggle_Help",
+          "groupControl": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bExecutionLimit:Stun",
+          "text": "$Val_Stun_ExecutionLimit_Text",
+          "type": "toggle",
+          "help": "$Val_Stun_ExecutionLimit_Help_New",
+          "groupCondition": 1,
+          "groupControl": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fExecutionHealthThreshold:Stun",
+          "text": "$Val_Stun_ExecutionHealthThreshold_Text",
+          "help": "$Val_Stun_ExecutionHealthThreshold_Help",
+          "type": "slider",
+          "groupCondition": 2,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunRegenDelaySetting:Stun",
+          "text": "$Val_Stun_RegenDelaySetting_Text",
+          "help": "$Val_Stun_RegenDelaySetting_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "bStunMeterToggle:Stun",
+          "text": "$Val_Stun_UI_Toggle_Text",
+          "help": "$Val_Stun_UI_Toggle_Help",
+          "type": "toggle",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPlayerStunToggle:Stun",
+          "text": "$Val_Stun_PlayerStun_Text",
+          "type": "toggle",
+          "groupControl": 4,
+          "groupCondition": 1,
+          "help": "$Val_Stun_PlayerStun_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPlayerExecutionToggle:Stun",
+          "text": "$Val_Stun_PlayerExecution_Toggle_Text",
+          "type": "toggle",
+          "groupCondition": {
+            "AND": [ 1, 4 ]
+          },
+          "help": "$Val_Stun_PlayerExecution_Toggle_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bFriendlyStunToggle:Stun",
+          "text": "$Val_Stun_Friendly_Toggle_Text",
+          "type": "toggle",
+          "groupCondition": 1,
+          "help": "$Val_Stun_Friendly_Toggle_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bDownedStateToggle:Stun",
+          "text": "$Val_Stun_DownedState_Toggle_Text",
+          "help": "$Val_Stun_DownedState_Toggle_Help",
+          "type": "toggle",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bAutoExecution:Stun",
+          "text": "$Val_Stun_AutoExecution_Text",
+          "type": "toggle",
+          "help": "$Val_Stun_AutoExecution_Help",
+          "groupCondition": 1,
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "uExecutionKey:Stun",
+          "text": "$Val_Stun_ExecutionKey_Text",
+          "type": "keymap",
+          "help": "$Val_Stun_ExecutionKey_Help",
+          "ignoreConflicts": false,
+          "groupCondition": { "NOT": 3 },
+          "valueOptions": {
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "text": "$Val_Stun_DmgMult_Text",
+          "help": "$Val_Stun_DmgMult_Help",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "fStunTimedBlockMult:Stun",
+          "text": "$Val_Stun_TimedBlock_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunParryMult:Stun",
+          "text": "$Val_Stun_Parry_Text",
+          "help": "$Val_Stun_Parry_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunBashMult:Stun",
+          "text": "$Val_Stun_Bash_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunPowerBashMult:Stun",
+          "text": "$Val_Stun_PowerBash_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunNormalAttackMult:Stun",
+          "text": "$Val_Stun_NormalAttack_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunPowerAttackMult:Stun",
+          "text": "$Val_Stun_PowerAttack_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunCounterAttackMult:Stun",
+          "text": "$Val_Stun_CounterAttack_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunUnarmedMult:Stun",
+          "text": "$Val_Stun_Unarmed_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunDaggerMult:Stun",
+          "text": "$Val_Stun_Dagger_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunSwordMult:Stun",
+          "text": "$Val_Stun_Sword_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunWarAxeMult:Stun",
+          "text": "$Val_Stun_WarAxe_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunMaceMult:Stun",
+          "text": "$Val_Stun_Mace_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStunGreatSwordMult:Stun",
+          "text": "$Val_Stun_GreatSword_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStun2HBluntMult:Stun",
+          "text": "$Val_Stun_2HW_Text",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$Val_Poise_Page_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bPoise_PoiseToggle:Poise",
+          "text": "$Val_Poise_Toggle_Text",
+          "help": "$Val_Poise_Toggle_Help",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPoise_PoiseMeterToggle:Poise",
+          "text": "$Val_Poise_MeterToggle_Text",
+          "help": "$Val_Poise_MeterToggle_Help",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPoise_DebugConsoleLog:Poise",
+          "text": "$Val_Poise_DebugConsoleLog_Text",
+          "help": "$Val_Poise_DebugConsoleLog_Help",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fPoise_StaggerProtectTime:Poise",
+          "text": "$Val_Poise_StaggerProtectTime_Text",
+          "help": "$Val_Poise_StaggerProtectTime_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_PoiseRegen:Poise",
+          "text": "$Val_Poise_PoiseRegen_Text",
+          "help": "$Val_Poise_PoiseRegen_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_RegenDelayTime:Poise",
+          "text": "$Val_Poise_RegenDelayTime_Text",
+          "help": "$Val_Poise_RegenDelayTime_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_DifficultyMultWeight:Poise",
+          "text": "$Val_Poise_DifficultyMultWeight_Text",
+          "help": "$Val_Poise_DifficultyMultWeight_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_StaggerThresholds_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_SmallStaggerTHLD:Poise",
+          "text": "$Val_Poise_SmallStaggerTHLD_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_MediumStaggerTHLD:Poise",
+          "text": "$Val_Poise_MediumStaggerTHLD_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_LargeStaggerTHLD:Poise",
+          "text": "$Val_Poise_LargeStaggerTHLD_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_BasePoiseDamage_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_BaseMeleePoiseDamage:Poise",
+          "text": "$Val_Poise_BaseMeleePoiseDamage_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BaseRangePoiseDamage:Poise",
+          "text": "$Val_Poise_BaseRangePoiseDamage_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BaseMagicPoiseDamage:Poise",
+          "text": "$Val_Poise_BaseMagicPoiseDamage_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_BasePoiseHealth_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_BasePoiseHealth:Poise",
+          "text": "$Val_Poise_BasePoiseHealth_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BaseArmorPoiseHealth:Poise",
+          "text": "$Val_Poise_BaseArmorPoiseHealth_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_HeavyArmorPoiseBonus:Poise",
+          "text": "$Val_Poise_HeavyArmorPoiseBonus_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_HealthScaling_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_ScaleHealthMult:Poise",
+          "text": "$Val_Poise_ScaleHealthMult_Text",
+          "help": "$Val_Poise_ScaleHealthMult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_WeightHealthMult:Poise",
+          "text": "$Val_Poise_WeightHealthMult_Text",
+          "help": "$Val_Poise_WeightHealthMult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_DamageScaling_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_ScaleDamageMult:Poise",
+          "text": "$Val_Poise_ScaleDamageMult_Text",
+          "help": "$Val_Poise_ScaleDamageMult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_WeightDamageMult:Poise",
+          "text": "$Val_Poise_WeightDamageMult_Text",
+          "help": "$Val_Poise_WeightDamageMult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_ActionMult_Header_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "fPoise_PowerAttackMult:Poise",
+          "text": "$Val_Poise_PowerAttackMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BashMult:Poise",
+          "text": "$Val_Poise_BashMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_PowerBashMult:Poise",
+          "text": "$Val_Poise_PowerBashMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_TargetStateMult_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_TargetPowerBashMult:Poise",
+          "text": "$Val_Poise_TargetPowerBashMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetBashMult:Poise",
+          "text": "$Val_Poise_TargetBashMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetPowerAttackMult:Poise",
+          "text": "$Val_Poise_TargetPowerAttackMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetLightAttackMult:Poise",
+          "text": "$Val_Poise_TargetLightAttackMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetBowDrawMult:Poise",
+          "text": "$Val_Poise_TargetBowDrawMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetCastingMult:Poise",
+          "text": "$Val_Poise_TargetCastingMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_WeaponTypeMult_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fHandToHandMeleeMult:Poise",
+          "text": "$Val_Poise_HandToHandMeleeMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandDaggerMult:Poise",
+          "text": "$Val_Poise_OneHandDaggerMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandSwordMult:Poise",
+          "text": "$Val_Poise_OneHandSwordMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandAxeMult:Poise",
+          "text": "$Val_Poise_OneHandAxeMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandMaceMult:Poise",
+          "text": "$Val_Poise_OneHandMaceMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTwoHandSwordMult:Poise",
+          "text": "$Val_Poise_TwoHandSwordMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTwoHandAxeMult:Poise",
+          "text": "$Val_Poise_TwoHandAxeMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBowMult:Poise",
+          "text": "$Val_Poise_BowMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fCrossbowMult:Poise",
+          "text": "$Val_Poise_CrossbowMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaffMult:Poise",
+          "text": "$Val_Poise_StaffMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Poise_ArmorSlotMult_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fHeadMult:Poise",
+          "text": "$Val_Poise_HeadMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBodyMult:Poise",
+          "text": "$Val_Poise_BodyMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fHandsMult:Poise",
+          "text": "$Val_Poise_HandsMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fFeetMult:Poise",
+          "text": "$Val_Poise_FeetMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fShieldMult:Poise",
+          "text": "$Val_Poise_ShieldMult_Text",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$Val_AI_Page_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bToggleAI:AI",
+          "text": "$Val_AI_Toggle_Text",
+          "help": "$Val_AI_Toggle_Help",
+          "groupControl": 1,
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bStopAIBash:AI",
+          "text": "$Val_AI_StopBash_Text",
+          "help": "$Val_AI_StopBash_Help",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bStopAIBashPower:AI",
+          "text": "$Val_AI_StopBashPower_Text",
+          "help": "$Val_AI_StopBashPower_Help",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bToggleDualWield:AI",
+          "text": "$Val_AI_ToggleDualWield_Text",
+          "help": "$Val_AI_ToggleDualWield_Help",
+          "groupCondition": 1,
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bToggleUnarmed:AI",
+          "text": "$Val_AI_ToggleUnarmed_Text",
+          "help": "$Val_AI_ToggleUnarmed_Help",
+          "groupCondition": 1,
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "iMaxSimultaneousDefenders:AI",
+          "text": "$Val_AI_MaxSimultaneousDefenders_Text",
+          "help": "$Val_AI_MaxSimultaneousDefenders_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "formatString": "{0}",
+            "sourceType": "ModSettingInt"
+          }
+        },
+        {
+          "id": "fParryAttemptChance:AI",
+          "text": "$Val_AI_ParryAttemptChance_Text",
+          "help": "$Val_AI_ParryAttemptChance_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockAttemptChance:AI",
+          "text": "$Val_AI_TimedBlockAttemptChance_Text",
+          "help": "$Val_AI_TimedBlockAttemptChance_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPerfectBlockAttemptChance:AI",
+          "text": "$Val_AI_PerfectBlockAttemptChance_Text",
+          "help": "$Val_AI_PerfectBlockAttemptChance_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fParryCooldown:AI",
+          "text": "$Val_AI_ParryCooldown_Text",
+          "help": "$Val_AI_ParryCooldown_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBlockCooldown:AI",
+          "text": "$Val_AI_BlockCooldown_Text",
+          "help": "$Val_AI_BlockCooldown_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBaseLightImpactTime:AI",
+          "text": "$Val_AI_BaseLightImpactTime_Text",
+          "help": "$Val_AI_BaseLightImpactTime_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBasePowerImpactTime:AI",
+          "text": "$Val_AI_BasePowerImpactTime_Text",
+          "help": "$Val_AI_BasePowerImpactTime_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_AI_ConfidenceScaling_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fConfidenceMult:AI",
+          "text": "$Val_AI_ConfidenceMult_Text",
+          "help": "$Val_AI_ConfidenceMult_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fConfidenceMin:AI",
+          "text": "$Val_AI_ConfidenceMin_Text",
+          "help": "$Val_AI_ConfidenceMin_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fConfidenceMax:AI",
+          "text": "$Val_AI_ConfidenceMax_Text",
+          "help": "$Val_AI_ConfidenceMax_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_AI_SkillScaling_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fSkillMult:AI",
+          "text": "$Val_AI_SkillMult_Text",
+          "help": "$Val_AI_SkillMult_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fSkillMin:AI",
+          "text": "$Val_AI_SkillMin_Text",
+          "help": "$Val_AI_SkillMin_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fSkillMax:AI",
+          "text": "$Val_AI_SkillMax_Text",
+          "help": "$Val_AI_SkillMax_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_AI_ActionMult_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fParrySkillMult:AI",
+          "text": "$Val_AI_ParrySkillMult_Text",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fParryCSMult:AI",
+          "text": "$Val_AI_ParryCSMult_Text",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockSkillMult:AI",
+          "text": "$Val_AI_TimedBlockSkillMult_Text",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockCSMult:AI",
+          "text": "$Val_AI_TimedBlockCSMult_Text",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPerfectBlockSkillMult:AI",
+          "text": "$Val_AI_PerfectBlockSkillMult_Text",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPerfectBlockCSMult:AI",
+          "text": "$Val_AI_PerfectBlockCSMult_Text",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_AI_Modifiers_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "fmaxConeDegrees:AI",
+          "text": "$Val_AI_MaxConeDegrees_Text",
+          "help": "$Val_AI_MaxConeDegrees_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 180,
+            "step": 1,
+            "formatString": "{0}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fbufferDistance:AI",
+          "text": "$Val_AI_BufferDistance_Text",
+          "help": "$Val_AI_BufferDistance_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 1,
+            "formatString": "{0}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fParryDelayOffset:AI",
+          "text": "$Val_AI_ParryDelayOffset_Text",
+          "help": "$Val_AI_ParryDelayOffset_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": -1.0,
+            "max": 1.0,
+            "step": 0.01,
+            "formatString": "{2}s",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPerfectBlockDelayOffset:AI",
+          "text": "$Val_AI_PerfectBlockDelayOffset_Text",
+          "help": "$Val_AI_PerfectBlockDelayOffset_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": -1.0,
+            "max": 1.0,
+            "step": 0.01,
+            "formatString": "{2}s",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTimedBlockDelayOffset:AI",
+          "text": "$Val_AI_TimedBlockDelayOffset_Text",
+          "help": "$Val_AI_TimedBlockDelayOffset_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": -1.0,
+            "max": 1.0,
+            "step": 0.01,
+            "formatString": "{2}s",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fJitterScale:AI",
+          "text": "$Val_AI_JitterScale_Text",
+          "help": "$Val_AI_JitterScale_Help",
+          "groupCondition": 1,
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 3.0,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+    },
+    {
+      "pageDisplayName": "$Val_Compatibility_Text",
+      "cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "id": "bPoiseCompatibility:Compatibility",
+          "text": "$Val_Poise_Text",
+          "type": "toggle",
+          "help": "$Val_Compatibility_Poise_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bUnblockableCompatibility:Compatibility",
+          "text": "$Val_UnblockableCompatibility_Text",
+          "type": "toggle",
+          "help": "$Val_UnblockableCompatibility_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "$Val_TrueHudAPI_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 1,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A25"
+          }
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 2,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A26"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_Obtained_InfoText",
+          "groupCondition": 1,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_Obtained_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_FailToObtain_InfoText",
+          "groupCondition": { "NOT": 1 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_FailToObtain_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_SpecialMeter_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_SpecialMeter_Obtained_InfoText",
+          "groupCondition": 2,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_SpecialMeter_Obtained_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_SpecialMeter_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_SpecialMeter_FailedToObtain_InfoText",
+          "groupCondition": { "NOT": 2 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_SpecialMeter_FailedToObtain_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_Text",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A23"
+          }
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 4,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A24"
+          }
+        },
+        {
+          "text": "$Val_EC_Damage_OptionText",
+          "type": "text",
+          "help": "$Val_EC_Damage_Installed_InfoText",
+          "groupCondition": 3,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_Installed_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_Damage_OptionText",
+          "type": "text",
+          "help": "$Val_EC_Damage_UnInstalled_InfoText",
+          "groupCondition": { "NOT": 3 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_UnInstalled_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_NPC_OptionText",
+          "type": "text",
+          "help": "$Val_EC_NPC_Installed_InfoText",
+          "groupCondition": 4,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_NPC_Installed_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_NPC_OptionText",
+          "type": "text",
+          "help": "$Val_EC_NPC_UnInstalled_InfoText",
+          "groupCondition": { "NOT": 4 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_NPC_UnInstalled_ValueText"
+          }
+        },
+        {
+          "text": "$Val_Exhaustion_Header_Text",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 5,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A27"
+          }
+        },
+        {
+          "text": "$Val_Exhaustion_OptionText",
+          "type": "text",
+          "help": "$Val_Exhaustion_Installed_InfoText",
+          "groupCondition": 5,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_Installed_ValueText"
+          }
+        },
+        {
+          "text": "$Val_Exhaustion_OptionText",
+          "type": "text",
+          "help": "$Val_Exhaustion_UnInstalled_InfoText",
+          "groupCondition": { "NOT": 5 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_UnInstalled_ValueText"
+          }
+        },
+        {
+          "text": "$Val_UnblockableHits_Header_Text",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 6,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A29"
+          }
+        },
+        {
+          "text": "$Val_UnblockableHits_OptionText",
+          "type": "text",
+          "help": "$Val_UnblockableHits_Installed_InfoText",
+          "groupCondition": 6,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_Installed_ValueText"
+          }
+        },
+        {
+          "text": "$Val_UnblockableHits_OptionText",
+          "type": "text",
+          "help": "$Val_UnblockableHits_UnInstalled_InfoText",
+          "groupCondition": { "NOT": 6 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_UnInstalled_ValueText"
+          }
+        }
+      ]
+    }
+  ],
+  "customContent": {
+    "source": "ValhallaCombat/ValhallaCombat_Cover.dds",
+    "x": -264,
+    "y": -120
+  }
+}

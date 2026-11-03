@@ -1,0 +1,102 @@
+[
+  {
+    "projectPath": "Actors",
+    "type": "kFloat",
+    "name": "Val_StaminaMult",
+    "value": 1.0
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kFloat",
+    "name": "Val_PoiseMult",
+    "value": 1.0
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kBool",
+    "name": "Val_PoiseBreaksBlock",
+    "value": false
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kBool",
+    "name": "Val_Unblockable",
+    "value": false
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kFloat",
+    "name": "Val_LightAttackCost",
+    "value": 0.0
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kFloat",
+    "name": "Val_PowerAttackCost",
+    "value": 0.0
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kFloat",
+    "name": "Val_LightBashCost",
+    "value": 0.0
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kFloat",
+    "name": "Val_PowerBashCost",
+    "value": 0.0
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kBool",
+    "name": "Val_BashAllowed",
+    "value": false
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kBool",
+    "name": "Val_ReactionPending",
+    "value": false
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_SpecialAtkStart"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_SpecialAtkStop"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_HyperArmorStart"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_HyperArmorStop"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_InvulStart"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_InvulStop"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_ActionOnHitStart"
+  },
+  {
+    "projectPath": "Actors",
+    "type": "kEvent",
+    "name": "Val_ActionOnHitStop"
+  }
+]

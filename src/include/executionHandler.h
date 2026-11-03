@@ -1,0 +1,93 @@
+#pragma once
+#include "lib/robin_hood.h"
+#include <mutex>
+/*Class handling all executions*/
+class executionHandler {
+public:
+
+	static executionHandler* GetSingleton()
+	{
+		static executionHandler singleton;
+		return  std::addressof(singleton);
+	}
+
+	/*Iterate through every actor that can be excuted, check their range to the player.
+	* attempt to execute the actor closest to the player.
+	* */
+	void tryPcExecution();
+
+	/// Queue an execution idle
+	void queueExecutionIdle(RE::Actor* a_executor, RE::Actor* a_victim, RE::TESIdleForm* a_executionIdle);
+
+	/// Queue one of execution idle, selected randomly from the vector
+	void queueExecutionIdle(RE::Actor* a_executor, RE::Actor* a_victim, const std::vector<RE::TESIdleForm*>& a_executionIdleV);
+
+	/*Attempt an execution. Help aggressor decide which killmove to use
+	based on aggressor/victim's relative position, rotation, and victim's race.
+	Also performs a check on whether the aggressor can execute victim.*/
+	bool attemptExecute(RE::Actor* executor, RE::Actor* victim);
+
+
+private:
+
+	void executeHumanoid(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeDraugr(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeFalmer(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeSpider(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeGargoyle(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeGiant(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeBear(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeSabreCat(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeWolf(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeTroll(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeHagraven(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeSpriggan(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeBoar(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeRiekling(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeAshHopper(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeSteamCenturion(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeDwarvenBallista(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeChaurusFlyer(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeLurker(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+	void executeDragon(RE::Actor* executer, RE::Actor* victim, RE::WEAPON_TYPE weaponType);
+
+};
+
+namespace inlineUtils
+{
+	inline void sendConsoleCommand(std::string a_command)
+	{
+		const auto scriptFactory = RE::IFormFactory::GetConcreteFormFactoryByType<RE::Script>();
+		const auto script = scriptFactory ? scriptFactory->Create() : nullptr;
+		if (script) {
+			const auto selectedRef = RE::Console::GetSelectedRef();
+			script->SetCommand(a_command);
+			script->CompileAndRun(selectedRef.get());
+			delete script;
+		}
+	}
+
+	/*Get a random element from this vector.
+	@param in the vector containing strings.
+	@return a random element from the vector.*/
+	inline std::string getRandomStr(std::vector<std::string> in) {
+		return in[rand() % in.size()];
+	}
+
+	/*Get a random element from this vector.
+	@param in the vector containing strings.
+	@return a random element from the vector.*/
+	inline RE::TESIdleForm* getRandomIdle(std::vector<RE::TESIdleForm*> in) {
+		//
+		// ("getting random idle");
+		//DEBUG("in size: {}", in.size());
+		auto i = rand() % in.size();
+		//
+		(i);
+		return in[i];
+	}
+
+
+
+}
+

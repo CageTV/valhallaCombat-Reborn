@@ -1,0 +1,2899 @@
+{
+	"modName": "ValhallaCombat",
+	"displayName": "$ValhallaCombat",
+	"minMcmVersion": 9,
+	"pages": [
+		{
+			"pageDisplayName": "$Val_Stamina_Text",
+			"cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_Stamina_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A25"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_Obtained_InfoText",
+          "groupCondition": 3,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_Obtained_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_FailToObtain_InfoText",
+          "groupCondition": { "NOT": 3 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_FailToObtain_ValueText"
+          }
+        },
+        {
+          "id": "bUIalert:Stamina",
+          "text": "$Val_UI_Alert_Text",
+          "type": "toggle",
+          "help": "$Val_UI_Alert__Help",
+          "groupCondition": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bStaminaDebuffToggle:Stamina",
+          "text": "$Val_StaminaDebuff_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_StaminaDebuff_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bExhaustionBlockSprintRun:Stamina",
+          "text": "Exhaustion Movement Restrictions",
+          "type": "toggle",
+          "help": "Blocks the character from running or sprinting while exhausted.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bExhaustionBlockAttacks:Stamina",
+          "text": "Exhaustion Attack Restrictions",
+          "type": "toggle",
+          "help": "Blocks the character from powerattacking or bashing while exhausted.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fBlockLockoutDuration_NPC:Stamina",
+          "text": "NPC Block Lockout Duration",
+          "help": "Duration that an exhausted NPC is locked out from blocking after suffering a guard break.",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fExhaustionBlockDuration_NPC:Stamina",
+          "text": "NPC Exhaustion Block Duration",
+          "help": "Duration that an exhausted NPC can hold a block.",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenMult:Stamina",
+          "text": "$Val_Stamina_Mult_Text",
+          "help": "$Val_Stamina_Mult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenLimit:Stamina",
+          "text": "$Val_Stamina_Limit_Text",
+          "help": "$Val_Stamina_Limit_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 20,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenMin:Stamina",
+          "text": "$Val_Stamina_Limit_Min_Text",
+          "help": "$Val_Stamina_Limit_Min_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 20,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fCombatStaminaRegenMult:Stamina",
+          "text": "$Val_Combat_Stamina_Mult_Text",
+          "help": "$Val_Combat_Stamina_Mult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBlockingStaminaRegenMult:Stamina",
+          "text": "$Val_Blocking_Stamina_Mult_Text",
+          "help": "$Val_Blocking_Stamina_Mult_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaminaRegenDelay:Stamina",
+          "text": "$Val_Stamina_Delay_Text",
+          "help": "$Val_Stamina_Delay_Help",
+          "type": "slider",
+          "valueOptions": {
+            "min": 1,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Atk_Header_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "bNonCombatStaminaCost:Stamina",
+          "text": "$Val_Non_Combat_Stamina_Cost_Text",
+          "type": "toggle",
+          "help": "$Val_Non_Combat_Stamina_Cost_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "<font color='#11ABA1'>Light Attacks</font>",
+          "type": "header"
+        },
+        {
+          "id": "uLightAttackStaminaMode:Stamina",
+          "text": "Light Attack Stamina System",
+          "type": "enum",
+          "help": "Legacy: refund on hit / cost on miss\nHitFrame: cost on hitframe\nDisabled: off",
+          "groupControl": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingInt",
+            "options": [
+              "Disabled",
+              "Legacy",
+              "HitFrame"
+            ]
+          }
+        },
+        {
+          "id": "bAttackStaminaToggle_NPC:Stamina",
+          "text": "$Val_Atk_Toggle_NPC_Text",
+          "type": "toggle",
+          "help": "$Val_Atk_Toggle_NPC_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bBlockedHitRegenStamina:Stamina",
+          "text": "$Val_Blocked_Count_As_Hit_Text",
+          "type": "toggle",
+          "help": "$Val_Blocked_Count_As_Hit_Help",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bLightAttackPerkMult:Stamina",
+          "text": "Light Attack Perk Multiplier",
+          "type": "toggle",
+          "help": "Attack stamina cost perk multiplier affects light attacks",
+          "groupCondition": 1,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostLight_Base:Stamina",
+          "text": "Light Attack Base Cost",
+          "help": "Base stamina cost of a light attack.",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostLight_WeightMult:Stamina",
+          "text": "Light Attack Weight Multiplier",
+          "help": "Additional stamina cost added for each point of weapon weight when performing a light attack.",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fAdditionalHitFrameCostMult:Stamina",
+          "text": "Additional Hitframe Cost Multiplier",
+          "help": "Multiplier applied to stamina costs from the second HitFrame onward. Works for light and power attacks",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeRewardLightHit_Point:Stamina",
+          "text": "Light Attack Hit Regen (Points)",
+          "help": "Points of stamina regenerated for each light attack that successfully hits an enemy.",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeRewardLightHit_WeightMult:Stamina",
+          "text": "Light Attack Hit Regen (Weight Mult)",
+          "help": "Additional stamina regen for each point of weapon weight when hitting an enemy with a light attack.",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeRewardLightHit_Percent:Stamina",
+          "text": "Light Attack Hit Regen (Percentage)",
+          "help": "$Val_Melee_Light_Hit_Help",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fAdditionalHitFrameRewardMult:Stamina",
+          "text": "Additional Hitframe Regen Multiplier",
+          "help": "Multiplier applied to stamina restored by successful hits after the first HitFrame.",
+          "type": "slider",
+          "groupCondition": 1,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#11ABA1'>Power Attacks</font>",
+          "type": "header"
+        },
+        {
+          "id": "bUseCustomPowerAttackCost:Stamina",
+          "text": "Use Custom Power Attack Stamina Cost",
+          "type": "toggle",
+          "help": "Replaces Skyrim's vanilla power attack stamina calculation with Valhalla's custom formula based on base cost and weapon weight.",
+          "groupControl": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPowerAttackPerkMult:Stamina",
+          "text": "Power Attack Perk Multiplier",
+          "type": "toggle",
+          "help": "Attack stamina cost perk multiplier affects power attacks",
+          "groupCondition": 2,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostPower_Base:Stamina",
+          "text": "Power Attack Base Cost",
+          "help": "Base stamina cost of a power attack.",
+          "type": "slider",
+          "groupCondition": 2,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostPower_WeightMult:Stamina",
+          "text": "Power Attack Weight Multiplier",
+          "help": "Additional stamina cost added for each point of weapon weight when performing a power attack.",
+          "type": "slider",
+          "groupCondition": 2,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#11ABA1'>Light Bashes</font>",
+          "type": "header"
+        },
+        {
+          "id": "bUseCustomLightBashCost:Stamina",
+          "text": "Use Custom Light Bash Stamina Cost",
+          "type": "toggle",
+          "help": "Replaces Skyrim's vanilla light bash stamina calculation with Valhalla's custom formula based on base cost and weapon weight.",
+          "groupControl": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bSuccessfulParryNoCost:Stamina",
+          "text": "Successful Parry No Stamina Cost",
+          "type": "toggle",
+          "help": "Successful parrys cost no stamina. Valhalla's parry system needs to be enabled",
+          "groupCondition": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bLightBashPerkMult:Stamina",
+          "text": "Light Bash Perk Multiplier",
+          "type": "toggle",
+          "help": "Attack stamina cost perk multiplier affects light bashes",
+          "groupCondition": 4,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostLightBash_Base:Stamina",
+          "text": "Light Bash Base Cost",
+          "help": "Base stamina cost of a light bash.",
+          "type": "slider",
+          "groupCondition": 4,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostLightBash_WeightMult:Stamina",
+          "text": "Light Bash Weight Multiplier",
+          "help": "Additional stamina cost added for each point of weapon weight when performing a light bash.",
+          "type": "slider",
+          "groupCondition": 4,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#11ABA1'>Power Bashes</font>",
+          "type": "header"
+        },
+        {
+          "id": "bUseCustomPowerBashCost:Stamina",
+          "text": "Use Custom Power Bash Stamina Cost",
+          "type": "toggle",
+          "help": "Replaces Skyrim's vanilla power bash stamina calculation with Valhalla's custom formula based on base cost and weapon weight.",
+          "groupControl": 5,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPowerBashPerkMult:Stamina",
+          "text": "Power Bash Perk Multiplier",
+          "type": "toggle",
+          "help": "Attack stamina cost perk multiplier affects power bashes",
+          "groupCondition": 5,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fMeleeCostPowerBash_Base:Stamina",
+          "text": "Power Bash Base Cost",
+          "help": "Base stamina cost of a power bash.",
+          "type": "slider",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fMeleeCostPowerBash_WeightMult:Stamina",
+          "text": "Power Bash Weight Multiplier",
+          "help": "Additional stamina cost added for each point of weapon weight when performing a power bash.",
+          "type": "slider",
+          "groupCondition": 5,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Bck_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bBlockStaminaToggle:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_Bck_StaminaBlocking_Toggle_Help",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bGuardBreak:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_GuardBreak_Toggle_Text",
+          "type": "toggle",
+          "help": "$Val_Bck_StaminaBlocking_GuardBreak_Toggle_Help",
+          "groupCondition": 3,
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "$Val_Bck_StaminaBlocking_Shd_Mult_Header_Text",
+          "help": "$Val_Bck_StaminaBlocking_Shd_Mult_Header_Help",
+          "type": "header"
+        },
+        {
+          "id": "fBckShdStaminaMult_PC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_Player_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckShdStaminaMult_NPC_Block_PC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_Player_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckShdStaminaMult_NPC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "$Val_Bck_StaminaBlocking_Wpn_Mult_Header_Text",
+          "help": "$Val_Bck_StaminaBlocking_Wpn_Mult_Header_Help",
+          "type": "header"
+        },
+        {
+          "id": "fBckWpnStaminaMult_PC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_Player_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckWpnStaminaMult_NPC_Block_PC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_Player_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBckWpnStaminaMult_NPC_Block_NPC:Stamina",
+          "text": "$Val_Bck_StaminaBlocking_NPC_NPC_Text",
+          "type": "slider",
+          "groupCondition": 3,
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+
+      ]
+		},
+		{
+			"pageDisplayName": "$Val_TimedBlocking_Page_Text",
+			"cursorFillMode": "topToBottom",
+			"content": [
+				{
+					"text": "$Val_General_Header_Text",
+					"type": "header"
+				},
+				{
+					"id": "bTimedBlockToggle:TimedBlocking",
+					"text": "$Val_TimedBlocking_Toggle_Text",
+					"help": "$Val_TimedBlocking_Toggle_Help",
+					"type": "toggle",
+					"groupControl": 1,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bBlockProjectileToggle:TimedBlocking",
+					"text": "$Val_TimedBlocking_Projectile_Text",
+					"help": "$Val_TimedBlocking_Projectile_Help",
+					"type": "toggle",
+					"groupControl": 2,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bTimedBlockProjectileToggle:TimedBlocking",
+					"text": "$Val_TimedBlocking_Projectile_Timed_Toggle_Text",
+					"help": "$Val_TimedBlocking_Projectile_Timed_Toggle_Help",
+					"type": "toggle",
+					"groupControl": 3,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bTimedBlockToggle_NPC:TimedBlocking",
+					"text": "Enable NPC Timed Blocking",
+					"type": "toggle",
+					"groupCondition": 1,
+					"help": "Enables Timed Blocking for NPCs.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bBlockProjectileToggle_NPC:TimedBlocking",
+					"text": "Enable NPC Projectile Block",
+					"help": "Enables Projectile Blocking for NPCs.",
+					"type": "toggle",
+					"groupCondition": 2,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bTimedBlockProjectileToggle_NPC:TimedBlocking",
+					"text": "Enable NPC Timed Projectile Block",
+					"help": "Enables Timed Projectile Blocking for NPCs.",
+					"type": "toggle",
+					"groupCondition": 3,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bWeaponBlockArrow:TimedBlocking",
+					"text": "Weapon Block Arrows",
+					"type": "toggle",
+					"help": "If enabled, arrows can be blocked using weapons.",
+					"groupCondition": { "OR": [ 2, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bWeaponBlockSpell:TimedBlocking",
+					"text": "Weapon Block Spells",
+					"type": "toggle",
+					"help": "If enabled, spells can be blocked using weapons.",
+					"groupCondition": { "OR": [ 2, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bShieldBlockArrow:TimedBlocking",
+					"text": "Shield Block Arrows",
+					"type": "toggle",
+					"help": "If enabled, arrows can be blocked using shields.",
+					"groupCondition": { "OR": [ 2, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bShieldBlockSpell:TimedBlocking",
+					"text": "Shield Block Spells",
+					"type": "toggle",
+					"help": "If enabled, spells can be blocked using shields.",
+					"groupCondition": { "OR": [ 2, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bPerfectBlockStaminaRegen:TimedBlocking",
+					"text": "Perfect Block Stamina",
+					"type": "toggle",
+					"help": "If enabled, perfect blocks restore stamina.",
+					"groupControl": 9,
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bPerfectBlockStaminaRegenExhaustion:TimedBlocking",
+					"text": "Perfect Block Stamina Exhaustion",
+					"type": "toggle",
+					"help": "If enabled, perfect blocks restore stamina during exhaustion.",
+					"groupCondition": {
+						"OR": [ 1, 3 ],
+						"AND": [ 9 ]
+					},
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fTimedBlockWindow:TimedBlocking",
+					"text": "$Val_TimedBlocking_Time_Text",
+					"help": "$Val_TimedBlocking_Time_Help",
+					"type": "slider",
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fPerfectBlockWindow:TimedBlocking",
+					"text": "$Val_TimedBlocking_PerfectTime_Text",
+					"help": "$Val_TimedBlocking_PerfectTime_Help",
+					"type": "slider",
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockCooldownTime:TimedBlocking",
+					"text": "$Val_TimedBlocking_Cooldown_Text",
+					"help": "$Val_TimedBlocking_Cooldown_Help",
+					"type": "slider",
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockStaminaCostMult:TimedBlocking",
+					"text": "$Val_TimedBlocking_StaminaCostMult_Text",
+					"help": "$Val_TimedBlocking_StaminaCostMult_Help",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 2,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Block Commitment</font>",
+					"type": "header"
+				},
+				{
+					"id": "bBlockCommitmentToggle:TimedBlocking",
+					"text": "$Val_TimedBlocking_Commitment_Toggle_Text",
+					"help": "$Val_TimedBlocking_Commitment_Toggle_Help",
+					"type": "toggle",
+					"groupControl": 4,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bBlockCommitmentToggle_NPC:TimedBlocking",
+					"text": "NPC Block Commitment",
+					"help": "Enables block commitment for NPCs",
+					"type": "toggle",
+					"groupCondition": 4,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fBlockCommitmentTime:TimedBlocking",
+					"text": "$Val_TimedBlocking_Commitment_Time_Text",
+					"help": "$Val_TimedBlocking_Commitment_Time_Help",
+					"type": "slider",
+					"groupCondition": 4,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Tackle</font>",
+					"type": "header"
+				},
+				{
+					"id": "bTackleToggle:TimedBlocking",
+					"text": "$Val_TimedBlocking_Tackle_Toggle_Text",
+					"help": "After a successful perfect block attacks from all directions are repelled",
+					"type": "toggle",
+					"groupControl": 5,
+					"groupCondition": 1,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bTackleToggle_NPC:TimedBlocking",
+					"text": "NPC Tackle",
+					"help": "Enables tackle for NPCs",
+					"type": "toggle",
+					"groupCondition": 5,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fTackleWindow:TimedBlocking",
+					"text": "Tackle Window",
+					"type": "slider",
+					"help": "The time window during which the tackle is active",
+					"groupCondition": 5,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 1.0,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTackleCooldownTime:TimedBlocking",
+					"text": "Tackle Cooldown",
+					"type": "slider",
+					"help": "The cooldown duration before a tackle can be executed again.",
+					"groupCondition": 5,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 10.0,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Experience</font>",
+					"type": "header"
+				},
+				{
+					"id": "bEnableBlockExp:TimedBlocking",
+					"text": "Enable Block Experience",
+					"type": "toggle",
+					"help": "If enabled, successful projectile blocks grant Block skill experience.",
+					"groupControl": 6,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fTimedBlockMeleeExp:TimedBlocking",
+					"text": "Timed Block Melee XP",
+					"type": "slider",
+					"help": "The amount of block experience awarded for a timed block against melee attacks.",
+					"groupCondition": 6,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 50.0,
+						"step": 0.5,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockProjectileExp:TimedBlocking",
+					"text": "Timed Block Projectile XP",
+					"type": "slider",
+					"help": "The amount of block experience awarded for a timed block against projectiles.",
+					"groupCondition": 6,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 50.0,
+						"step": 0.5,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fBlockProjectileExp:TimedBlocking",
+					"text": "Block Projectile XP",
+					"type": "slider",
+					"help": "The amount of block experience awarded for a standard block against projectiles.",
+					"groupCondition": 6,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 50.0,
+						"step": 0.5,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "$Val_TimedBlocking_Effect_Header_Text",
+					"type": "header",
+					"position": 1
+				},
+				{
+					"id": "uTimedBlockSparkType:TimedBlocking",
+					"text": "$Val_TimedBlocking_TimedBlockSparkType_Text",
+					"help": "$Val_TimedBlocking_TimedBlockSparkType_Help",
+					"type": "enum",
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"options": [
+							"$Val_TimedBlocking_TimedBlockSparkType_Off_Text",
+							"$Val_TimedBlocking_TimedBlockSparkType_Fantasy_Text",
+							"$Val_TimedBlocking_TimedBlockSparkType_Realism_Text"
+						],
+						"sourceType": "ModSettingInt"
+					}
+				},
+				{
+					"id": "bTimedBlockScreenShake:TimedBlocking",
+					"text": "$Val_TimedBlocking_ScreenShake_Text",
+					"type": "toggle",
+					"help": "",
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bTimeBlockSFX:TimedBlocking",
+					"text": "$Val_TimedBlocking_SFX_Text",
+					"help": "$Val_TimedBlocking_SFX_Help",
+					"type": "toggle",
+					"groupControl": 7,
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fTimedBlockSFXVolume:TimedBlocking",
+					"text": "$Val_TimedBlocking_SFX_Volume_Text",
+					"help": "$Val_TimedBlocking_SFX_Volume_Help",
+					"type": "slider",
+					"groupCondition": {
+						"OR": [ 1, 3 ],
+						"AND": [ 7 ]
+					},
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "bTimedBlockSlowTime:TimedBlocking",
+					"type": "toggle",
+					"text": "$Val_TimedBlocking_SlowTime_Text",
+					"help": "$Val_TimedBlocking_SlowTime_Help",
+					"groupCondition": { "OR": [ 1, 3 ] },
+					"groupControl": 8,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fTimedBlockSlowTimePercentage:TimedBlocking",
+					"text": "Slow Percentage: Timed Block",
+					"help": "Percentage of time slowed down after a successful timed block or perfect block",
+					"type": "slider",
+					"groupCondition": {
+						"OR": [ 1, 3 ],
+						"AND": [ 8 ]
+					},
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockSlowTime_Timed:TimedBlocking",
+					"text": "$Val_TimedBlocking_SlowTime_Timed_Text",
+					"help": "$Val_TimedBlocking_SlowTime_Timed_Help",
+					"type": "slider",
+					"groupCondition": {
+						"OR": [ 1, 3 ],
+						"AND": [ 8 ]
+					},
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockSlowTime_Perfect:TimedBlocking",
+					"text": "$Val_TimedBlocking_SlowTime_Perfect_Text",
+					"help": "$Val_TimedBlocking_SlowTime_Perfect_Help",
+					"type": "slider",
+					"groupCondition": {
+						"OR": [ 1, 3 ],
+						"AND": [ 8 ]
+					},
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "Parry",
+			"cursorFillMode": "topToBottom",
+			"content": [
+				{
+					"text": "$Val_General_Header_Text",
+					"type": "header"
+				},
+				{
+					"id": "bParryToggle:Parry",
+					"text": "Enable Parry",
+					"type": "toggle",
+					"groupControl": 1,
+					"help": "If enabled, the player can parry incoming melee attacks.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bParryToggle_NPC:Parry",
+					"text": "Enable NPC Parry",
+					"type": "toggle",
+					"groupCondition": 1,
+					"help": "If enabled, NPCs are capable of parrying incoming melee attacks.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bEnableProjectileParry:Parry",
+					"text": "Enable Projectile Parry",
+					"type": "toggle",
+					"groupControl": 2,
+					"groupCondition": 1,
+					"help": "If enabled, incoming projectiles can be deflected.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bEnableProjectileParry_NPC:Parry",
+					"text": "Enable NPC Projectile Parry",
+					"type": "toggle",
+					"groupCondition": 2,
+					"help": "If enabled, incoming projectiles can be deflected by NPCs.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bWeaponParryArrow:Parry",
+					"text": "Weapon Parry Arrows",
+					"type": "toggle",
+					"help": "Allow arrows and bolts to be deflected using an equipped weapon.",
+					"groupCondition": {
+						"AND": [ 1, 2 ]
+					},
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bWeaponParrySpell:Parry",
+					"text": "Weapon Parry Spells",
+					"type": "toggle",
+					"help": "Allow magic spells to be deflected using an equipped weapon.",
+					"groupCondition": {
+						"AND": [ 1, 2 ]
+					},
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bShieldParryArrow:Parry",
+					"text": "Shield Parry Arrows",
+					"type": "toggle",
+					"help": "Allow arrows and bolts to be deflected using an equipped shield.",
+					"groupCondition": {
+						"AND": [ 1, 2 ]
+					},
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bShieldParrySpell:Parry",
+					"text": "Shield Parry Spells",
+					"type": "toggle",
+					"help": "Allow magic spells to be deflected using an equipped shield.",
+					"groupCondition": {
+						"AND": [ 1, 2 ]
+					},
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fParryWindow_Start:Parry",
+					"text": "Parry Window Start",
+					"type": "slider",
+					"help": "The starting point of the parry window.",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fParryWindow_End:Parry",
+					"text": "Parry Window End",
+					"type": "slider",
+					"help": "The ending point of the parry window.",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "bEnableGuardBash:Parry",
+					"text": "Enable Guard Bash",
+					"type": "toggle",
+					"help": "If enabled, power bashes break the guard of blocking enemies.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Experience</font>",
+					"type": "header"
+				},
+				{
+					"id": "bEnableParryExp:Parry",
+					"text": "Enable Parry Experience",
+					"type": "toggle",
+					"groupCondition": 1,
+					"groupControl": 3,
+					"help": "If enabled, successful parries grant block skill experience.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fParryMeleeExp:Parry",
+					"text": "Parry Melee XP",
+					"type": "slider",
+					"help": "The amount of block experience awarded for a successful melee attack parry.",
+					"groupCondition": 3,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 50.0,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fParryProjectileExp:Parry",
+					"text": "Parry Projectile XP",
+					"type": "slider",
+					"help": "The amount of block experience awarded for a successful projectile deflection.",
+					"groupCondition": 3,
+					"valueOptions": {
+						"min": 0.0,
+						"max": 50.0,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Effects</font>",
+					"type": "header",
+					"position": 1
+				},
+				{
+					"id": "uParrySparkType:Parry",
+					"text": "Spark Style",
+					"type": "enum",
+					"help": "The style of spark effects played on successful parry.",
+					"groupCondition": 1,
+					"valueOptions": {
+						"options": [
+							"No Spark",
+							"Fantasy",
+							"Realism"
+						],
+						"sourceType": "ModSettingInt"
+					}
+				},
+				{
+					"id": "bParryScreenShake:Parry",
+					"text": "Screen Shake",
+					"type": "toggle",
+					"help": "",
+					"groupCondition": 1,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bParrySFX:Parry",
+					"text": "Sound",
+					"type": "toggle",
+					"groupCondition": 1,
+					"groupControl": 4,
+					"help": "Play dedicated sound effects on successful parry.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fParrySFXVolume:Parry",
+					"text": "Sound Volume",
+					"type": "slider",
+					"help": "Loudness of parry sound effects.",
+					"groupCondition": 4,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "bParrySlowTime:Parry",
+					"text": "Slow Time",
+					"type": "toggle",
+					"groupCondition": 1,
+					"groupControl": 5,
+					"help": "Slow down time when a parry is performed for a more cinematic feeling.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fParrySlowTimePercentage:Parry",
+					"text": "Slow Percentage: Parry",
+					"type": "slider",
+					"help": "Percentage of time slowed down after a successful parry.",
+					"groupCondition": 5,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fParrySlowTimeDuration:Parry",
+					"text": "Slow Duration: Parry",
+					"type": "slider",
+					"help": "Duration of time slowed down after a successful parry.",
+					"groupCondition": 5,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "$Val_Stun_Page_Text",
+			"cursorFillMode": "topToBottom",
+			"content": [
+				{
+					"text": "$Val_General_Header_Text",
+					"type": "header"
+				},
+				{
+					"id": "bStunToggle:Stun",
+					"text": "$Val_Stun_Toggle_Text",
+					"type": "toggle",
+					"help": "$Val_Stun_Toggle_Help",
+					"groupControl": 1,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bExecutionLimit:Stun",
+					"text": "Execution Limit",
+					"type": "toggle",
+					"help": "NPCs can only be executed if their health is below a certain percentage threshold.",
+					"groupCondition": 1,
+					"groupControl": 2,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "fExecutionHealthThreshold:Stun",
+					"text": "Execution Health Threshold",
+					"help": "Sets the percentage threshold below which NPCs can be executed.",
+					"type": "slider",
+					"groupCondition": 2,
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunRegenDelaySetting:Stun",
+					"text": "Stun Regeneration Delay",
+					"help": "Sets a delay until the stun value of an NPC regenerates.",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "bStunMeterToggle:Stun",
+					"text": "$Val_Stun_UI_Toggle_Text",
+					"help": "$Val_Stun_UI_Toggle_Help",
+					"type": "toggle",
+					"groupCondition": 1,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bPlayerStunToggle:Stun",
+					"text": "Enable Player Stun",
+					"type": "toggle",
+					"groupControl": 4,
+					"groupCondition": 1,
+					"help": "Stun applies to player.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bPlayerExecutionToggle:Stun",
+					"text": "Enable Player Execution",
+					"type": "toggle",
+					"groupCondition": {
+						"AND": [ 1, 4 ]
+					},
+					"help": "The player can be executed.",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bFriendlyStunToggle:Stun",
+					"text": "$Val_Stun_Friendly_Toggle_Text",
+					"type": "toggle",
+					"groupCondition": 1,
+					"help": "$Val_Stun_Friendly_Toggle_Help",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bDownedStateToggle:Stun",
+					"text": "$Val_Stun_DownedState_Toggle_Text",
+					"help": "$Val_Stun_DownedState_Toggle_Help",
+					"type": "toggle",
+					"groupCondition": 1,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bAutoExecution:Stun",
+					"text": "$Val_Stun_AutoExecution_Text",
+					"type": "toggle",
+					"help": "$Val_Stun_AutoExecution_Help",
+					"groupCondition": 1,
+					"groupControl": 3,
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "uExecutionKey:Stun",
+					"text": "$Val_Stun_ExecutionKey_Text",
+					"type": "keymap",
+					"help": "$Val_Stun_ExecutionKey_Help",
+					"ignoreConflicts": false,
+					"groupCondition": { "NOT": 3 },
+					"valueOptions": {
+						"sourceType": "ModSettingInt"
+					}
+				},
+				{
+					"text": "$Val_Stun_DmgMult_Text",
+					"help": "$Val_Stun_DmgMult_Help",
+					"type": "header",
+					"position": 1
+				},
+				{
+					"id": "fStunTimedBlockMult:Stun",
+					"text": "$Val_Stun_TimedBlock_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunParryMult:Stun",
+					"text": "$Val_Stun_Parry_Text",
+					"help": "$Val_Stun_Parry_Help",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunBashMult:Stun",
+					"text": "$Val_Stun_Bash_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunPowerBashMult:Stun",
+					"text": "$Val_Stun_PowerBash_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunNormalAttackMult:Stun",
+					"text": "$Val_Stun_NormalAttack_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunPowerAttackMult:Stun",
+					"text": "$Val_Stun_PowerAttack_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunCounterAttackMult:Stun",
+					"text": "$Val_Stun_CounterAttack_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunUnarmedMult:Stun",
+					"text": "$Val_Stun_Unarmed_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunDaggerMult:Stun",
+					"text": "$Val_Stun_Dagger_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunSwordMult:Stun",
+					"text": "$Val_Stun_Sword_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunWarAxeMult:Stun",
+					"text": "$Val_Stun_WarAxe_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunMaceMult:Stun",
+					"text": "$Val_Stun_Mace_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStunGreatSwordMult:Stun",
+					"text": "$Val_Stun_GreatSword_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fStun2HBluntMult:Stun",
+					"text": "$Val_Stun_2HW_Text",
+					"type": "slider",
+					"groupCondition": 1,
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "Poise",
+			"cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "text": "$Val_General_Header_Text",
+          "type": "header"
+        },
+        {
+          "id": "bPoise_PoiseToggle:Poise",
+          "text": "Enable Poise",
+          "help": "Enable poise system.",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPoise_PoiseMeterToggle:Poise",
+          "text": "Enable Poise Meter",
+          "help": "Enable TrueHud's API, allowing an extra indicator for actor's poise.",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bPoise_DebugConsoleLog:Poise",
+          "text": "Enable Console Log",
+          "help": "Enable console logging.",
+          "type": "toggle",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "fPoise_StaggerProtectTime:Poise",
+          "text": "Stagger Protection Time",
+          "help": "Duration of stagger immunity following a stagger event.",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_PoiseRegen:Poise",
+          "text": "Poise Regeneration Rate",
+          "help": "Rate at which poise health regenerates.",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_RegenDelayTime:Poise",
+          "text": "Regeneration Delay Time",
+          "help": "Delay in seconds before poise begins regenerating after taking damage.",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 10,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_DifficultyMultWeight:Poise",
+          "text": "Poise Difficulty",
+          "help": "Defines how much the game's difficulty setting affects poise damage (0 = Disabled).",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Stagger Thresholds</font>",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_SmallStaggerTHLD:Poise",
+          "text": "Small Stagger Threshold",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_MediumStaggerTHLD:Poise",
+          "text": "Medium Stagger Threshold",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_LargeStaggerTHLD:Poise",
+          "text": "Large Stagger Threshold",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Base Poise Damage</font>",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_BaseMeleePoiseDamage:Poise",
+          "text": "Base Melee Poise Damage",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BaseRangePoiseDamage:Poise",
+          "text": "Base Ranged Poise Damage",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 100,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BaseMagicPoiseDamage:Poise",
+          "text": "Base Magic Poise Damage",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Base Poise Health</font>",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_BasePoiseHealth:Poise",
+          "text": "Base Poise Health",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BaseArmorPoiseHealth:Poise",
+          "text": "Base Armor Poise Health",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 200,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_HeavyArmorPoiseBonus:Poise",
+          "text": "Heavy Armor Poise Bonus",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Health Scaling Multipliers</font>",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_ScaleHealthMult:Poise",
+          "text": "Scale Health Multiplier",
+          "help": "Controls how much actor scale affects max poise health. (0 = Disabled)",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_WeightHealthMult:Poise",
+          "text": "Weight Health Multiplier",
+          "help": "Controls how much actor body weight affects max poise health for Human NPCs. (0 = Disabled)",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Damage Scaling Multipliers</font>",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_ScaleDamageMult:Poise",
+          "text": "Scale Damage Multiplier",
+          "help": "Controls how relative scale differences affect poise damage. (0 = Disabled)",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_WeightDamageMult:Poise",
+          "text": "Weight Damage Multiplier",
+          "help": "Controls how relative weight differences affect poise damage between Human NPCs. (0 = Disabled)",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0.0,
+            "max": 2.0,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Action Multipliers</font>",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "id": "fPoise_PowerAttackMult:Poise",
+          "text": "Power Attack Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_BashMult:Poise",
+          "text": "Bash Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_PowerBashMult:Poise",
+          "text": "Power Bash Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Target State Multipliers</font>",
+          "type": "header"
+        },
+        {
+          "id": "fPoise_TargetPowerBashMult:Poise",
+          "text": "Target Power Bash Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetBashMult:Poise",
+          "text": "Target Bash Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetPowerAttackMult:Poise",
+          "text": "Target Power Attack Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetLightAttackMult:Poise",
+          "text": "Target Light Attack Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetBowDrawMult:Poise",
+          "text": "Target Bow Draw Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fPoise_TargetCastingMult:Poise",
+          "text": "Target Casting Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Weapon Type Multipliers</font>",
+          "type": "header"
+        },
+        {
+          "id": "fHandToHandMeleeMult:Poise",
+          "text": "Hand to Hand Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandDaggerMult:Poise",
+          "text": "Dagger Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandSwordMult:Poise",
+          "text": "One-Handed Sword Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandAxeMult:Poise",
+          "text": "One-Handed Axe Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fOneHandMaceMult:Poise",
+          "text": "One-Handed Mace Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTwoHandSwordMult:Poise",
+          "text": "Two-Handed Sword Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fTwoHandAxeMult:Poise",
+          "text": "Two-Handed Axe Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBowMult:Poise",
+          "text": "Bow Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fCrossbowMult:Poise",
+          "text": "Crossbow Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fStaffMult:Poise",
+          "text": "Staff Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 5,
+            "step": 0.1,
+            "formatString": "{1}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "text": "<font color='#CDAF6E'>Armor Slot Multipliers</font>",
+          "type": "header"
+        },
+        {
+          "id": "fHeadMult:Poise",
+          "text": "Head Armor Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fBodyMult:Poise",
+          "text": "Body Armor Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fHandsMult:Poise",
+          "text": "Hands Armor Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fFeetMult:Poise",
+          "text": "Feet Armor Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        },
+        {
+          "id": "fShieldMult:Poise",
+          "text": "Shield Multiplier",
+          "type": "slider",
+          "valueOptions": {
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "formatString": "{2}",
+            "sourceType": "ModSettingFloat"
+          }
+        }
+      ]
+		},
+		{
+			"pageDisplayName": "AI",
+			"cursorFillMode": "topToBottom",
+			"content": [
+				{
+					"text": "$Val_General_Header_Text",
+					"type": "header"
+				},
+				{
+					"id": "bToggleAI:AI",
+					"text": "Enable AI Combat Overhaul",
+					"help": "Toggles the entire adaptive NPC defensive system.",
+					"groupControl": 1,
+					"type": "toggle",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bStopAIBash:AI",
+					"text": "Disable AI Normal Bash",
+					"help": "Prevents NPCs from executing standard bashes.",
+					"type": "toggle",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bStopAIBashPower:AI",
+					"text": "Disable AI Power Bash",
+					"help": "Prevents NPCs from executing power bashes.",
+					"type": "toggle",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bToggleDualWield:AI",
+					"text": "Enable Dual Wield",
+					"help": "Enables dual wielding NPCs to use timed block and parries.",
+					"groupCondition": 1,
+					"type": "toggle",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "bToggleUnarmed:AI",
+					"text": "Enable Unarmed",
+					"help": "Enables unarmed NPCs to use timed block and parries.",
+					"groupCondition": 1,
+					"type": "toggle",
+					"valueOptions": {
+						"sourceType": "ModSettingBool"
+					}
+				},
+				{
+					"id": "iMaxSimultaneousDefenders:AI",
+					"text": "Simultaneous Defenders",
+					"help": "Maximum number of nearby enemies that can attempt to block or parry a incoming attack at the same time.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 1,
+						"max": 5,
+						"step": 1,
+						"formatString": "{0}",
+						"sourceType": "ModSettingInt"
+					}
+				},
+				{
+					"id": "fParryAttemptChance:AI",
+					"text": "Base Parry Chance",
+					"help": "Base probability for an NPC to attempt a parry.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockAttemptChance:AI",
+					"text": "Base Timed Block Chance",
+					"help": "Base probability for an NPC to attempt a timed block.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fPerfectBlockAttemptChance:AI",
+					"text": "Base Perfect Block Chance",
+					"help": "Base probability for an NPC to attempt a perfect block.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fParryCooldown:AI",
+					"text": "Parry Cooldown",
+					"help": "Cooldown period in seconds before an NPC can attempt another parry.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fBlockCooldown:AI",
+					"text": "Block Cooldown",
+					"help": "Cooldown period in seconds before an NPC can attempt another timed or perfect block.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 10,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fBaseLightImpactTime:AI",
+					"text": "Base Light Impact Time",
+					"help": "Base timing estimate in seconds for light attacks.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 2,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fBasePowerImpactTime:AI",
+					"text": "Base Power Impact Time",
+					"help": "Base timing estimate in seconds for power attacks.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 2,
+						"step": 0.01,
+						"formatString": "{2}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Confidence Scaling</font>",
+					"type": "header"
+				},
+				{
+					"id": "fConfidenceMult:AI",
+					"text": "Confidence Multiplier Scale",
+					"help": "Scales how heavily actor confidence affects NPC decisions.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fConfidenceMin:AI",
+					"text": "Minimum Confidence Multiplier",
+					"help": "Lower cap for confidence scaling.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fConfidenceMax:AI",
+					"text": "Maximum Confidence Multiplier",
+					"help": "Upper cap for confidence scaling.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 1,
+						"max": 5,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Skill Scaling</font>",
+					"type": "header"
+				},
+				{
+					"id": "fSkillMult:AI",
+					"text": "Skill Multiplier Scale",
+					"help": "Scales how heavily Block skill level affects NPC decisions.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fSkillMin:AI",
+					"text": "Minimum Skill Multiplier",
+					"help": "Multiplier applied when an NPC has 0 Block skill.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 1,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fSkillMax:AI",
+					"text": "Maximum Skill Multiplier",
+					"help": "Multiplier applied when an NPC has 100 Block skill.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 1,
+						"max": 5,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Action Multipliers</font>",
+					"type": "header"
+				},
+				{
+					"id": "fParrySkillMult:AI",
+					"text": "Parry Skill Multiplier",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fParryCSMult:AI",
+					"text": "Parry Combat Style Multiplier",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockSkillMult:AI",
+					"text": "Timed Block Skill Multiplier",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockCSMult:AI",
+					"text": "Timed Block Combat Style Multiplier",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fPerfectBlockSkillMult:AI",
+					"text": "Perfect Block Skill Multiplier",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fPerfectBlockCSMult:AI",
+					"text": "Perfect Block Combat Style Multiplier",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 3,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"text": "<font color='#CDAF6E'>Modifiers</font>",
+					"type": "header"
+				},
+				{
+					"id": "fmaxConeDegrees:AI",
+					"text": "Max Facing Angle",
+					"help": "Maximum angle difference for the NPC to react to an incoming attack.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 180,
+						"step": 1,
+						"formatString": "{0}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fbufferDistance:AI",
+					"text": "Buffer Range Check",
+					"help": "Extra distance margin evaluated alongside weapon reach.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0,
+						"max": 200,
+						"step": 1,
+						"formatString": "{0}",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fParryDelayOffset:AI",
+					"text": "Parry Delay Offset",
+					"help": "Adjusts the base delay before an AI executes a parry. Negative values make the AI react faster, positive values make them react slower.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": -1.0,
+						"max": 1.0,
+						"step": 0.01,
+						"formatString": "{2}s",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fPerfectBlockDelayOffset:AI",
+					"text": "Perfect Block Delay Offset",
+					"help": "Adjusts the base delay before an AI executes a perfect block. Negative values make the AI react faster, positive values make them react slower.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": -1.0,
+						"max": 1.0,
+						"step": 0.01,
+						"formatString": "{2}s",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fTimedBlockDelayOffset:AI",
+					"text": "Timed Block Delay Offset",
+					"help": "Adjusts the base delay before an AI executes a timed block. Negative values make the AI react faster, positive values make them react slower.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": -1.0,
+						"max": 1.0,
+						"step": 0.01,
+						"formatString": "{2}s",
+						"sourceType": "ModSettingFloat"
+					}
+				},
+				{
+					"id": "fJitterScale:AI",
+					"text": "AI Reaction Randomness",
+					"help": "Scales the randomness of AI reaction times. 0.0 removes randomness entirely. 1.0 is default behavior, and values above 1.0 increase the unpredictability.",
+					"groupCondition": 1,
+					"type": "slider",
+					"valueOptions": {
+						"min": 0.0,
+						"max": 3.0,
+						"step": 0.1,
+						"formatString": "{1}",
+						"sourceType": "ModSettingFloat"
+					}
+				}
+			]
+		},
+		{
+			"pageDisplayName": "$Val_Compatibility_Text",
+			"cursorFillMode": "topToBottom",
+      "content": [
+        {
+          "id": "bPoiseCompatibility:Compatibility",
+          "text": "$Val_Poise_Text",
+          "type": "toggle",
+          "help": "$Val_Compatibility_Poise_Help",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "id": "bUnblockableCompatibility:Compatibility",
+          "text": "Unblockable",
+          "type": "toggle",
+          "help": "Unblockable attacks will ignore timed blocks, perfect blocks and parrys.",
+          "valueOptions": {
+            "sourceType": "ModSettingBool"
+          }
+        },
+        {
+          "text": "$Val_TrueHudAPI_Text",
+          "type": "header",
+          "position": 1
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 1,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A25"
+          }
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 2,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A26"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_Obtained_InfoText",
+          "groupCondition": 1,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_Obtained_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_FailToObtain_InfoText",
+          "groupCondition": { "NOT": 1 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_FailToObtain_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_SpecialMeter_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_SpecialMeter_Obtained_InfoText",
+          "groupCondition": 2,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_SpecialMeter_Obtained_ValueText"
+          }
+        },
+        {
+          "text": "$Val_TrueHUDAPI_SpecialMeter_OptionText",
+          "type": "text",
+          "help": "$Val_TrueHUDAPI_SpecialMeter_FailedToObtain_InfoText",
+          "groupCondition": { "NOT": 2 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_TrueHUDAPI_SpecialMeter_FailedToObtain_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_Text",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 3,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A23"
+          }
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 4,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A24"
+          }
+        },
+        {
+          "text": "$Val_EC_Damage_OptionText",
+          "type": "text",
+          "help": "$Val_EC_Damage_Installed_InfoText",
+          "groupCondition": 3,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_Installed_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_Damage_OptionText",
+          "type": "text",
+          "help": "$Val_EC_Damage_UnInstalled_InfoText",
+          "groupCondition": { "NOT": 3 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_Damage_UnInstalled_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_NPC_OptionText",
+          "type": "text",
+          "help": "$Val_EC_NPC_Installed_InfoText",
+          "groupCondition": 4,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_NPC_Installed_ValueText"
+          }
+        },
+        {
+          "text": "$Val_EC_NPC_OptionText",
+          "type": "text",
+          "help": "$Val_EC_NPC_UnInstalled_InfoText",
+          "groupCondition": { "NOT": 4 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "$Val_EC_NPC_UnInstalled_ValueText"
+          }
+        },
+        {
+          "text": "Exhaustion - Incremental Fatigue",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 5,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A27"
+          }
+        },
+        {
+          "text": "Exhaustion Compatibility",
+          "type": "text",
+          "help": "Exhaustion - Incremental Fatigue installed. Compatibility features are enabled.",
+          "groupCondition": 5,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "<font color='#33dd33'>Installed</font>"
+          }
+        },
+        {
+          "text": "Exhaustion Compatibility",
+          "type": "text",
+          "help": "Exhaustion - Incremental Fatigue not installed. Compatibility features are disabled.",
+          "groupCondition": { "NOT": 5 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "<font color='#5a5964'>Not Installed</font>"
+          }
+        },
+        {
+          "text": "Unblockable Hits",
+          "type": "header"
+        },
+        {
+          "type": "hiddenToggle",
+          "groupControl": 6,
+          "valueOptions": {
+            "sourceType": "GlobalValue",
+            "sourceForm": "ValhallaCombat.esp|56A29"
+          }
+        },
+        {
+          "text": "Unblockable Hits Compatibility",
+          "type": "text",
+          "help": "Unblockable Hits installed. Compatibility features are enabled.",
+          "groupCondition": 6,
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "<font color='#33dd33'>Installed</font>"
+          }
+        },
+        {
+          "text": "Unblockable Hits Compatibility",
+          "type": "text",
+          "help": "Unblockable Hits not installed. Compatibility features are disabled.",
+          "groupCondition": { "NOT": 6 },
+          "groupBehavior": "skip",
+          "valueOptions": {
+            "value": "<font color='#5a5964'>Not Installed</font>"
+          }
+        }
+      ]
+		}
+	],
+	"customContent": {
+		"source": "ValhallaCombat/ValhallaCombat_Cover.dds",
+		"x": -264,
+		"y": -120
+	}
+}

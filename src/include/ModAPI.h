@@ -1,0 +1,49 @@
+#pragma once
+#include "include/lib/ValhallaCombatAPI.h"
+class ModAPI
+{
+	using InterfaceVersion1 = VAL_API::IVVAL1;
+
+	using InterfaceVersion2 = VAL_API::IVVAL2;
+
+	using InterfaceVersion3 = VAL_API::IVVAL3;
+
+public:
+	class VALInterface : public InterfaceVersion3
+	{
+	private:
+		VALInterface() noexcept {};
+		virtual ~VALInterface() noexcept {};
+
+	public:
+		static VALInterface* GetSingleton() noexcept
+		{
+			static VALInterface singleton;
+			return std::addressof(singleton);
+		}
+
+		// InterfaceVersion1
+		virtual void processStunDamage(VAL_API::STUNSOURCE stunSource, RE::TESObjectWEAP* weapon, RE::Actor* aggressor, RE::Actor* victim, float baseDamage) noexcept override;
+
+		// InterfaceVersion2
+		virtual bool getIsTimedBlocking(RE::Actor* a_actor) noexcept override;
+		virtual bool getIsPerfectBlocking(RE::Actor* a_actor) noexcept override;
+		virtual void triggerTimedBlockSuccess(RE::Actor* a_actor) noexcept override;
+		virtual bool isActorExhausted(RE::Actor* a_actor) noexcept override;
+		virtual bool isActorStunned(RE::Actor* a_actor) noexcept override;
+
+		// InterfaceVersion3
+		virtual bool isEligibleForExecution(RE::Actor* a_actor) noexcept override;
+		virtual bool getIsTackling(RE::Actor* a_actor) noexcept override;
+		virtual bool inParryState(RE::Actor* a_actor) noexcept override;
+		virtual void applyMovementRestrictions(RE::Actor* a_actor) noexcept override;
+		virtual void clearMovementRestrictions(RE::Actor* a_actor) noexcept override;
+		virtual void initStaminaDebuff(RE::Actor* a_actor) noexcept override;
+		virtual void stopDebuff(RE::Actor* a_actor) noexcept override;
+		
+	private:
+		unsigned long apiTID = 0;
+
+	};
+};
+
